@@ -63,10 +63,6 @@
 - (void)mouseDown:(NSEvent *)event {
     NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
     CGSize size = self.bounds.size;
-    if (event.modifierFlags & NSCommandKeyMask) {
-        self.model.jx = (point.x / self.bounds.size.width) * 2 - 1;
-        self.model.jy = 1 - (point.y / self.bounds.size.height) * 2;
-    }
     if (event.clickCount % 2 == 0) {
         [self.model zoomInAtPoint:point size:size];
     }
@@ -84,16 +80,10 @@
 
 - (void)mouseDragged:(NSEvent *)event {
     NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-    if (event.modifierFlags & NSCommandKeyMask) {
-        self.model.jx = (point.x / self.bounds.size.width) * 2 - 1;
-        self.model.jy = 1 - (point.y / self.bounds.size.height) * 2;
-    }
-    else {
-        double dx = point.x - self.dragPoint.x;
-        double dy = point.y - self.dragPoint.y;
-        self.model.x = self.anchor.x - dx / self.model.zoom;
-        self.model.y = self.anchor.y + dy / self.model.zoom;
-    }
+    double dx = point.x - self.dragPoint.x;
+    double dy = point.y - self.dragPoint.y;
+    self.model.x = self.anchor.x - dx / self.model.zoom;
+    self.model.y = self.anchor.y + dy / self.model.zoom;
     [self setNeedsDisplay:YES];
 }
 

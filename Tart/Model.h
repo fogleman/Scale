@@ -19,8 +19,9 @@
 @property (assign) double jx;
 @property (assign) double jy;
 @property (assign) double gamma;
-@property (retain) NSGradient *gradient;
-@property (retain) NSData *palette;
+
+- (void)mandelbrot;
+- (void)julia;
 
 - (CGPoint)tileToScreen:(CGPoint)point center:(CGPoint)center size:(CGSize)size zoom:(long)zoom;
 - (CGPoint)tileToScreen:(CGPoint)point size:(CGSize)size;
