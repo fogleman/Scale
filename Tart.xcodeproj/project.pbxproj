@@ -1,0 +1,310 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		69F64D8A16DAEA76003D6DDB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F64D8916DAEA76003D6DDB /* Cocoa.framework */; };
+		69F64D9416DAEA76003D6DDB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 69F64D9216DAEA76003D6DDB /* InfoPlist.strings */; };
+		69F64D9616DAEA76003D6DDB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F64D9516DAEA76003D6DDB /* main.m */; };
+		69F64D9A16DAEA76003D6DDB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 69F64D9816DAEA76003D6DDB /* Credits.rtf */; };
+		69F64D9D16DAEA76003D6DDB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F64D9C16DAEA76003D6DDB /* AppDelegate.m */; };
+		69F64DA016DAEA76003D6DDB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69F64D9E16DAEA76003D6DDB /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		69F64D8616DAEA76003D6DDB /* Tart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		69F64D8916DAEA76003D6DDB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		69F64D8C16DAEA76003D6DDB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		69F64D8D16DAEA76003D6DDB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		69F64D8E16DAEA76003D6DDB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		69F64D9116DAEA76003D6DDB /* Tart-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tart-Info.plist"; sourceTree = "<group>"; };
+		69F64D9316DAEA76003D6DDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		69F64D9516DAEA76003D6DDB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		69F64D9716DAEA76003D6DDB /* Tart-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tart-Prefix.pch"; sourceTree = "<group>"; };
+		69F64D9916DAEA76003D6DDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		69F64D9B16DAEA76003D6DDB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		69F64D9C16DAEA76003D6DDB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		69F64D9F16DAEA76003D6DDB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		69F64D8316DAEA76003D6DDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69F64D8A16DAEA76003D6DDB /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		69F64D7D16DAEA76003D6DDB = {
+			isa = PBXGroup;
+			children = (
+				69F64D8F16DAEA76003D6DDB /* Tart */,
+				69F64D8816DAEA76003D6DDB /* Frameworks */,
+				69F64D8716DAEA76003D6DDB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		69F64D8716DAEA76003D6DDB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				69F64D8616DAEA76003D6DDB /* Tart.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		69F64D8816DAEA76003D6DDB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				69F64D8916DAEA76003D6DDB /* Cocoa.framework */,
+				69F64D8B16DAEA76003D6DDB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		69F64D8B16DAEA76003D6DDB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				69F64D8C16DAEA76003D6DDB /* AppKit.framework */,
+				69F64D8D16DAEA76003D6DDB /* CoreData.framework */,
+				69F64D8E16DAEA76003D6DDB /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		69F64D8F16DAEA76003D6DDB /* Tart */ = {
+			isa = PBXGroup;
+			children = (
+				69F64D9B16DAEA76003D6DDB /* AppDelegate.h */,
+				69F64D9C16DAEA76003D6DDB /* AppDelegate.m */,
+				69F64D9E16DAEA76003D6DDB /* MainMenu.xib */,
+				69F64D9016DAEA76003D6DDB /* Supporting Files */,
+			);
+			path = Tart;
+			sourceTree = "<group>";
+		};
+		69F64D9016DAEA76003D6DDB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				69F64D9116DAEA76003D6DDB /* Tart-Info.plist */,
+				69F64D9216DAEA76003D6DDB /* InfoPlist.strings */,
+				69F64D9516DAEA76003D6DDB /* main.m */,
+				69F64D9716DAEA76003D6DDB /* Tart-Prefix.pch */,
+				69F64D9816DAEA76003D6DDB /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		69F64D8516DAEA76003D6DDB /* Tart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69F64DA316DAEA76003D6DDB /* Build configuration list for PBXNativeTarget "Tart" */;
+			buildPhases = (
+				69F64D8216DAEA76003D6DDB /* Sources */,
+				69F64D8316DAEA76003D6DDB /* Frameworks */,
+				69F64D8416DAEA76003D6DDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tart;
+			productName = Tart;
+			productReference = 69F64D8616DAEA76003D6DDB /* Tart.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		69F64D7E16DAEA76003D6DDB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Michael Fogleman";
+			};
+			buildConfigurationList = 69F64D8116DAEA76003D6DDB /* Build configuration list for PBXProject "Tart" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 69F64D7D16DAEA76003D6DDB;
+			productRefGroup = 69F64D8716DAEA76003D6DDB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				69F64D8516DAEA76003D6DDB /* Tart */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		69F64D8416DAEA76003D6DDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69F64D9416DAEA76003D6DDB /* InfoPlist.strings in Resources */,
+				69F64D9A16DAEA76003D6DDB /* Credits.rtf in Resources */,
+				69F64DA016DAEA76003D6DDB /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		69F64D8216DAEA76003D6DDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69F64D9616DAEA76003D6DDB /* main.m in Sources */,
+				69F64D9D16DAEA76003D6DDB /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		69F64D9216DAEA76003D6DDB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69F64D9316DAEA76003D6DDB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		69F64D9816DAEA76003D6DDB /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69F64D9916DAEA76003D6DDB /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		69F64D9E16DAEA76003D6DDB /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69F64D9F16DAEA76003D6DDB /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		69F64DA116DAEA76003D6DDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		69F64DA216DAEA76003D6DDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		69F64DA416DAEA76003D6DDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tart/Tart-Prefix.pch";
+				INFOPLIST_FILE = "Tart/Tart-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		69F64DA516DAEA76003D6DDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tart/Tart-Prefix.pch";
+				INFOPLIST_FILE = "Tart/Tart-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		69F64D8116DAEA76003D6DDB /* Build configuration list for PBXProject "Tart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69F64DA116DAEA76003D6DDB /* Debug */,
+				69F64DA216DAEA76003D6DDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69F64DA316DAEA76003D6DDB /* Build configuration list for PBXNativeTarget "Tart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69F64DA416DAEA76003D6DDB /* Debug */,
+				69F64DA516DAEA76003D6DDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 69F64D7E16DAEA76003D6DDB /* Project object */;
+}
