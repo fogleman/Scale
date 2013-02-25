@@ -81,7 +81,7 @@ void julia(int max, int width, int height, double wx, double wy, double ww, doub
     return [NSData dataWithBytesNoCopy:palette length:length];
 }
 
-+ (NSData *)computeTileDataWithMode:(int)mode max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(float)jx jy:(float)jy {
++ (NSData *)computeTileDataWithMode:(int)mode max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(double)jx jy:(double)jy {
     int tile_size = TILE_SIZE * aa;
     int size = tile_size * tile_size;
     int length = sizeof(unsigned short) * size;

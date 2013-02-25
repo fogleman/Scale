@@ -14,7 +14,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        [self mandelbrot];
+        [self julia];
     }
     return self;
 }
@@ -107,6 +107,11 @@
     double dy = q.y - p.y;
     self.x -= dx;
     self.y += dy;
+}
+
+- (void)pan:(CGPoint)offset anchor:(CGPoint)anchor {
+    self.x = anchor.x - offset.x / self.zoom;
+    self.y = anchor.y + offset.y / self.zoom;
 }
 
 - (void)moveLeft {

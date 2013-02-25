@@ -12,7 +12,7 @@
 
 + (NSData *)computePaletteWithGradient:(NSGradient *)gradient size:(int)size gamma:(double)gamma;
 
-+ (NSData *)computeTileDataWithMode:(int)mode max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(float)jx jy:(float)jy;
++ (NSData *)computeTileDataWithMode:(int)mode max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(double)jx jy:(double)jy;
 
 + (NSData *)clComputeTileDataWithMode:(int)mode max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(float)jx jy:(float)jy;
 

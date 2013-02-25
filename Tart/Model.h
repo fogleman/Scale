@@ -34,6 +34,7 @@
 - (void)zoomInAtPoint:(CGPoint)point size:(CGSize)size;
 - (void)zoomOut;
 - (void)zoomOutAtPoint:(CGPoint)point size:(CGSize)size;
+- (void)pan:(CGPoint)offset anchor:(CGPoint)anchor;
 - (void)moveLeft;
 - (void)moveRight;
 - (void)moveUp;

@@ -35,8 +35,7 @@
     @synchronized(self) {
         data = [Fractal clComputeTileDataWithMode:self.model.mode max:self.model.max zoom:self.model.zoom i:tile.x j:tile.y aa:self.model.aa jx:self.model.jx jy:self.model.jy];
     }
-    NSImage *image = [Fractal computeTileImageWithData:data palette:palette];
-    return image;
+    return [Fractal computeTileImageWithData:data palette:palette];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
@@ -82,8 +81,7 @@
     NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
     double dx = point.x - self.dragPoint.x;
     double dy = point.y - self.dragPoint.y;
-    self.model.x = self.anchor.x - dx / self.model.zoom;
-    self.model.y = self.anchor.y + dy / self.model.zoom;
+    [self.model pan:CGPointMake(dx, dy) anchor:self.anchor];
     [self setNeedsDisplay:YES];
 }
 
