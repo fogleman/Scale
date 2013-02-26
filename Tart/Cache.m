@@ -38,6 +38,15 @@
     if (model == self.model && size.width == self.size.width && size.height == self.size.height) {
         return;
     }
+    if (![model dataCompatible:self.model]) {
+        [self.seen removeAllObjects];
+        [self.dataCache removeAllObjects];
+        [self.maxLookup removeAllObjects];
+    }
+    if (![model imageCompatible:self.model]) {
+        [self.seen removeAllObjects];
+        [self.imageCache removeAllObjects];
+    }
     self.model = model;
     self.size = size;
     self.a = [model screenToTile:CGPointMake(0, size.height) size:size];
@@ -77,7 +86,7 @@
     long zoom = ((NSNumber *)[key objectAtIndex:2]).integerValue;
     NSData *cachedData = [self.dataCache objectForKey:key];
     int cachedMax = ((NSNumber *)[self.maxLookup objectForKey:key]).intValue;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         BOOL abort = NO;
         if (zoom != self.model.zoom) {
             abort = YES;
@@ -107,9 +116,19 @@
         }
         NSImage *image = [Fractal computeTileImageWithData:data palette:model.palette];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.dataCache setObject:data forKey:key];
-            [self.maxLookup setObject:@(max) forKey:key];
-            [self.imageCache setObject:image forKey:key];
+            if ([model dataCompatible:self.model]) {
+                [self.dataCache setObject:data forKey:key];
+                [self.maxLookup setObject:@(max) forKey:key];
+            }
+            else {
+                [self.seen removeObject:key];
+            }
+            if ([model imageCompatible:self.model]) {
+                [self.imageCache setObject:image forKey:key];
+            }
+            else {
+                [self.seen removeObject:key];
+            }
             [self.view setNeedsDisplay:YES];
         });
     });

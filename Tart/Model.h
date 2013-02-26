@@ -25,6 +25,9 @@
 + (Model *)mandelbrot;
 + (Model *)julia;
 
+- (BOOL)dataCompatible:(Model *)model;
+- (BOOL)imageCompatible:(Model *)model;
+
 - (CGPoint)tileToScreen:(CGPoint)point size:(CGSize)size center:(CGPoint)center zoom:(long)zoom;
 - (CGPoint)tileToScreen:(CGPoint)point size:(CGSize)size;
 - (CGPoint)screenToTile:(CGPoint)point size:(CGSize)size center:(CGPoint)center zoom:(long)zoom;
@@ -33,6 +36,8 @@
 - (CGPoint)screenToPoint:(CGPoint)point size:(CGSize)size;
 
 - (Model *)withGradient:(NSGradient *)gradient;
+- (Model *)moreDetail;
+- (Model *)lessDetail;
 - (Model *)zoomIn;
 - (Model *)zoomInAtPoint:(CGPoint)point size:(CGSize)size;
 - (Model *)zoomOut;

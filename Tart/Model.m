@@ -69,6 +69,38 @@
     return model;
 }
 
+- (BOOL)dataCompatible:(Model *)model {
+    if (self.mode != model.mode) {
+        return NO;
+    }
+    if (self.aa != model.aa) {
+        return NO;
+    }
+    if (self.jx != model.jx) {
+        return NO;
+    }
+    if (self.jy != model.jy) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)imageCompatible:(Model *)model {
+    if (![self dataCompatible:model]) {
+        return NO;
+    }
+    if (self.max != model.max) {
+        return NO;
+    }
+    if (self.gamma != model.gamma) {
+        return NO;
+    }
+    if (![self.gradient isEqual:model.gradient]) {
+        return NO;
+    }
+    return YES;
+}
+
 - (CGPoint)tileToScreen:(CGPoint)point size:(CGSize)size center:(CGPoint)center zoom:(long)zoom {
     int x = size.width / 2 - center.x * zoom + point.x * TILE_SIZE;
     int y = size.height / 2 + center.y * zoom - point.y * TILE_SIZE - TILE_SIZE;
@@ -108,7 +140,6 @@
 - (NSData *)palette {
     @synchronized (self) {
         if (_palette == nil) {
-            NSLog(@"computePaletteWithGradient");
             _palette = [Fractal computePaletteWithGradient:self.gradient size:self.max gamma:self.gamma];
         }
         return _palette;
@@ -118,6 +149,20 @@
 - (Model *)withGradient:(NSGradient *)gradient {
     Model *model = [self copy];
     model.gradient = gradient;
+    model.palette = nil;
+    return model;
+}
+
+- (Model *)moreDetail {
+    Model *model = [self copy];
+    model.max = MIN(self.max * 2, MAX_DETAIL);
+    model.palette = nil;
+    return model;
+}
+
+- (Model *)lessDetail {
+    Model *model = [self copy];
+    model.max = MAX(self.max / 2, MIN_DETAIL);
     model.palette = nil;
     return model;
 }

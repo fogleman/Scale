@@ -126,4 +126,14 @@
     [self setNeedsDisplay:YES];
 }
 
+- (IBAction)onMoreDetail:(id)sender {
+    self.model = [self.model moreDetail];
+    [self setNeedsDisplay:YES];
+}
+
+- (IBAction)onLessDetail:(id)sender {
+    self.model = [self.model lessDetail];
+    [self setNeedsDisplay:YES];
+}
+
 @end
