@@ -8,36 +8,39 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Model : NSObject
+@interface Model : NSObject <NSCopying>
 
-@property (assign) int mode;
-@property (assign) int max;
-@property (assign) long zoom;
-@property (assign) double x;
-@property (assign) double y;
-@property (assign) int aa;
-@property (assign) double jx;
-@property (assign) double jy;
-@property (assign) double gamma;
+@property (assign, readonly, nonatomic) int mode;
+@property (assign, readonly, nonatomic) int max;
+@property (assign, readonly, nonatomic) long zoom;
+@property (assign, readonly, nonatomic) double x;
+@property (assign, readonly, nonatomic) double y;
+@property (assign, readonly, nonatomic) int aa;
+@property (assign, readonly, nonatomic) double jx;
+@property (assign, readonly, nonatomic) double jy;
+@property (assign, readonly, nonatomic) double gamma;
+@property (retain, readonly, nonatomic) NSGradient *gradient;
+@property (retain, readonly, nonatomic) NSData *palette;
 
-- (void)mandelbrot;
-- (void)julia;
++ (Model *)mandelbrot;
++ (Model *)julia;
 
-- (CGPoint)tileToScreen:(CGPoint)point center:(CGPoint)center size:(CGSize)size zoom:(long)zoom;
+- (CGPoint)tileToScreen:(CGPoint)point size:(CGSize)size center:(CGPoint)center zoom:(long)zoom;
 - (CGPoint)tileToScreen:(CGPoint)point size:(CGSize)size;
-- (CGPoint)screenToTile:(CGPoint)point center:(CGPoint)center size:(CGSize)size zoom:(long)zoom;
+- (CGPoint)screenToTile:(CGPoint)point size:(CGSize)size center:(CGPoint)center zoom:(long)zoom;
 - (CGPoint)screenToTile:(CGPoint)point size:(CGSize)size;
 - (CGPoint)pointToScreen:(CGPoint)point size:(CGSize)size;
 - (CGPoint)screenToPoint:(CGPoint)point size:(CGSize)size;
 
-- (void)zoomIn;
-- (void)zoomInAtPoint:(CGPoint)point size:(CGSize)size;
-- (void)zoomOut;
-- (void)zoomOutAtPoint:(CGPoint)point size:(CGSize)size;
-- (void)pan:(CGPoint)offset anchor:(CGPoint)anchor;
-- (void)moveLeft;
-- (void)moveRight;
-- (void)moveUp;
-- (void)moveDown;
+- (Model *)withGradient:(NSGradient *)gradient;
+- (Model *)zoomIn;
+- (Model *)zoomInAtPoint:(CGPoint)point size:(CGSize)size;
+- (Model *)zoomOut;
+- (Model *)zoomOutAtPoint:(CGPoint)point size:(CGSize)size;
+- (Model *)pan:(CGPoint)offset anchor:(CGPoint)anchor;
+- (Model *)moveLeft;
+- (Model *)moveRight;
+- (Model *)moveUp;
+- (Model *)moveDown;
 
 @end

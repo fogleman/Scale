@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69A50F8A16DC35A500BF8A25 /* Cache.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A50F8916DC35A500BF8A25 /* Cache.m */; };
 		69F64D8A16DAEA76003D6DDB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F64D8916DAEA76003D6DDB /* Cocoa.framework */; };
 		69F64D9416DAEA76003D6DDB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 69F64D9216DAEA76003D6DDB /* InfoPlist.strings */; };
 		69F64D9616DAEA76003D6DDB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F64D9516DAEA76003D6DDB /* main.m */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		69A50F8816DC35A500BF8A25 /* Cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cache.h; sourceTree = "<group>"; };
+		69A50F8916DC35A500BF8A25 /* Cache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cache.m; sourceTree = "<group>"; };
 		69F64D8616DAEA76003D6DDB /* Tart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69F64D8916DAEA76003D6DDB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		69F64D8C16DAEA76003D6DDB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -102,6 +105,8 @@
 			children = (
 				69F64D9B16DAEA76003D6DDB /* AppDelegate.h */,
 				69F64D9C16DAEA76003D6DDB /* AppDelegate.m */,
+				69A50F8816DC35A500BF8A25 /* Cache.h */,
+				69A50F8916DC35A500BF8A25 /* Cache.m */,
 				69F64DB016DAF3A4003D6DDB /* Common.h */,
 				69F64DB116DAF3A4003D6DDB /* Common.m */,
 				69F64DAE16DAED4B003D6DDB /* Fractal.cl */,
@@ -200,6 +205,7 @@
 				69F64DAF16DAED4B003D6DDB /* Fractal.cl in Sources */,
 				69F64DB216DAF3A4003D6DDB /* Common.m in Sources */,
 				69F64DB516DB0D4B003D6DDB /* Model.m in Sources */,
+				69A50F8A16DC35A500BF8A25 /* Cache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

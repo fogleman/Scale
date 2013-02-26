@@ -8,42 +8,68 @@
 
 #import "Model.h"
 #import "Common.h"
+#import "Fractal.h"
 
 @implementation Model
+
+@synthesize palette = _palette;
+
++ (Model *)mandelbrot {
+    Model *model = [[Model alloc] init];
+    model.mode = MANDELBROT;
+    model.max = INITIAL_DETAIL;
+    model.zoom = INITIAL_ZOOM;
+    model.x = -0.5;
+    model.y = 0;
+    model.aa = INITIAL_AA;
+    model.jx = 0;
+    model.jy = 0;
+    model.gamma = INITIAL_GAMMA;
+    model.gradient = nil;
+    return model;
+}
+
++ (Model *)julia {
+    Model *model = [[Model alloc] init];
+    model.mode = JULIA;
+    model.max = INITIAL_DETAIL;
+    model.zoom = INITIAL_ZOOM;
+    model.x = 0;
+    model.y = 0;
+    model.aa = INITIAL_AA;
+    model.jx = 0.285;
+    model.jy = 0.01;
+    model.gamma = INITIAL_GAMMA;
+    model.gradient = nil;
+    return model;
+}
 
 - (id)init {
     self = [super init];
     if (self) {
-        [self julia];
     }
     return self;
 }
 
-- (void)mandelbrot {
-    self.mode = MANDELBROT;
-    self.max = INITIAL_DETAIL;
-    self.zoom = INITIAL_ZOOM;
-    self.x = -0.5;
-    self.y = 0;
-    self.aa = INITIAL_AA;
-    self.jx = 0;
-    self.jy = 0;
-    self.gamma = INITIAL_GAMMA;
+- (Model *)copyWithZone:(NSZone *)zone {
+    Model *model = [[[self class] alloc] init];
+    if (model) {
+        model.mode = self.mode;
+        model.max = self.max;
+        model.zoom = self.zoom;
+        model.x = self.x;
+        model.y = self.y;
+        model.aa = self.aa;
+        model.jx = self.jx;
+        model.jy = self.jy;
+        model.gamma = self.gamma;
+        model.gradient = [self.gradient copyWithZone:zone];
+        model.palette = [self.palette copyWithZone:zone];
+    }
+    return model;
 }
 
-- (void)julia {
-    self.mode = JULIA;
-    self.max = INITIAL_DETAIL;
-    self.zoom = INITIAL_ZOOM;
-    self.x = 0;
-    self.y = 0;
-    self.aa = INITIAL_AA;
-    self.jx = 0.285;
-    self.jy = 0.01;
-    self.gamma = INITIAL_GAMMA;
-}
-
-- (CGPoint)tileToScreen:(CGPoint)point center:(CGPoint)center size:(CGSize)size zoom:(long)zoom {
+- (CGPoint)tileToScreen:(CGPoint)point size:(CGSize)size center:(CGPoint)center zoom:(long)zoom {
     int x = size.width / 2 - center.x * zoom + point.x * TILE_SIZE;
     int y = size.height / 2 + center.y * zoom - point.y * TILE_SIZE - TILE_SIZE;
     return CGPointMake(x, y);
@@ -51,10 +77,10 @@
 
 - (CGPoint)tileToScreen:(CGPoint)point size:(CGSize)size {
     CGPoint center = CGPointMake(self.x, self.y);
-    return [self tileToScreen:point center:center size:size zoom:self.zoom];
+    return [self tileToScreen:point size:size center:center zoom:self.zoom];
 }
 
-- (CGPoint)screenToTile:(CGPoint)point center:(CGPoint)center size:(CGSize)size zoom:(long)zoom {
+- (CGPoint)screenToTile:(CGPoint)point size:(CGSize)size center:(CGPoint)center zoom:(long)zoom {
     double i = (point.x - size.width / 2 + center.x * zoom) / TILE_SIZE;
     double j = (point.y - size.height / 2 - center.y * zoom) / -TILE_SIZE;
     i = round(i - 0.5);
@@ -64,7 +90,7 @@
 
 - (CGPoint)screenToTile:(CGPoint)point size:(CGSize)size {
     CGPoint center = CGPointMake(self.x, self.y);
-    return [self screenToTile:point center:center size:size zoom:self.zoom];
+    return [self screenToTile:point size:size center:center zoom:self.zoom];
 }
 
 - (CGPoint)pointToScreen:(CGPoint)point size:(CGSize)size {
@@ -79,55 +105,132 @@
     return CGPointMake(x, y);
 }
 
-- (void)zoomIn {
-    self.zoom *= 2;
-    self.zoom = MIN(self.zoom, MAX_ZOOM);
+- (NSData *)palette {
+    @synchronized (self) {
+        if (_palette == nil) {
+            NSLog(@"computePaletteWithGradient");
+            _palette = [Fractal computePaletteWithGradient:self.gradient size:self.max gamma:self.gamma];
+        }
+        return _palette;
+    }
 }
 
-- (void)zoomInAtPoint:(CGPoint)point size:(CGSize)size {
-    CGPoint p = [self screenToPoint:point size:size];
-    [self zoomIn];
-    CGPoint q = [self screenToPoint:point size:size];
+- (Model *)withGradient:(NSGradient *)gradient {
+    Model *model = [self copy];
+    model.gradient = gradient;
+    model.palette = nil;
+    return model;
+}
+
+- (Model *)zoomIn {
+    Model *model = [self copy];
+    model.zoom = MIN(self.zoom * 2, MAX_ZOOM);
+    return model;
+}
+
+- (Model *)zoomInAtPoint:(CGPoint)point size:(CGSize)size {
+    Model *model = [self copy];
+    CGPoint p = [model screenToPoint:point size:size];
+    model.zoom = MIN(self.zoom * 2, MAX_ZOOM);
+    CGPoint q = [model screenToPoint:point size:size];
     double dx = q.x - p.x;
     double dy = q.y - p.y;
-    self.x -= dx;
-    self.y += dy;
+    model.x -= dx;
+    model.y += dy;
+    return model;
 }
 
-- (void)zoomOut {
-    self.zoom /= 2;
-    self.zoom = MAX(self.zoom, MIN_ZOOM);
+- (Model *)zoomOut {
+    Model *model = [self copy];
+    model.zoom = MAX(self.zoom / 2, MIN_ZOOM);
+    return model;
 }
 
-- (void)zoomOutAtPoint:(CGPoint)point size:(CGSize)size {
-    CGPoint p = [self screenToPoint:point size:size];
-    [self zoomOut];
-    CGPoint q = [self screenToPoint:point size:size];
+- (Model *)zoomOutAtPoint:(CGPoint)point size:(CGSize)size {
+    Model *model = [self copy];
+    CGPoint p = [model screenToPoint:point size:size];
+    model.zoom = MAX(self.zoom / 2, MIN_ZOOM);
+    CGPoint q = [model screenToPoint:point size:size];
     double dx = q.x - p.x;
     double dy = q.y - p.y;
-    self.x -= dx;
-    self.y += dy;
+    model.x -= dx;
+    model.y += dy;
+    return model;
 }
 
-- (void)pan:(CGPoint)offset anchor:(CGPoint)anchor {
-    self.x = anchor.x - offset.x / self.zoom;
-    self.y = anchor.y + offset.y / self.zoom;
+- (Model *)pan:(CGPoint)offset anchor:(CGPoint)anchor {
+    Model *model = [self copy];
+    model.x = anchor.x - offset.x / model.zoom;
+    model.y = anchor.y + offset.y / model.zoom;
+    return model;
 }
 
-- (void)moveLeft {
-    self.x -= (double)PAN_FACTOR / self.zoom;
+- (Model *)moveLeft {
+    Model *model = [self copy];
+    model.x -= (double)PAN_FACTOR / model.zoom;
+    return model;
 }
 
-- (void)moveRight {
-    self.x += (double)PAN_FACTOR / self.zoom;
+- (Model *)moveRight {
+    Model *model = [self copy];
+    model.x += (double)PAN_FACTOR / model.zoom;
+    return model;
 }
 
-- (void)moveUp {
-    self.y += (double)PAN_FACTOR / self.zoom;
+- (Model *)moveUp {
+    Model *model = [self copy];
+    model.y += (double)PAN_FACTOR / model.zoom;
+    return model;
 }
 
-- (void)moveDown {
-    self.y -= (double)PAN_FACTOR / self.zoom;
+- (Model *)moveDown {
+    Model *model = [self copy];
+    model.y -= (double)PAN_FACTOR / model.zoom;
+    return model;
+}
+
+- (void)setMode:(int)mode {
+    _mode = mode;
+}
+
+- (void)setMax:(int)max {
+    _max = max;
+}
+
+- (void)setZoom:(long)zoom {
+    _zoom = zoom;
+}
+
+- (void)setX:(double)x {
+    _x = x;
+}
+
+- (void)setY:(double)y {
+    _y = y;
+}
+
+- (void)setAa:(int)aa {
+    _aa = aa;
+}
+
+- (void)setJx:(double)jx {
+    _jx = jx;
+}
+
+- (void)setJy:(double)jy {
+    _jy = jy;
+}
+
+- (void)setGamma:(double)gamma {
+    _gamma = gamma;
+}
+
+- (void)setGradient:(NSGradient *)gradient {
+    _gradient = gradient;
+}
+
+- (void)setPalette:(NSData *)palette {
+    _palette = palette;
 }
 
 @end
