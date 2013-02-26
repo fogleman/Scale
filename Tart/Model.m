@@ -37,8 +37,8 @@
     model.x = 0;
     model.y = 0;
     model.aa = INITIAL_AA;
-    model.jx = 0.285;
-    model.jy = 0.01;
+    model.jx = -0.4;
+    model.jy = 0.6;
     model.gamma = INITIAL_GAMMA;
     model.gradient = nil;
     return model;
