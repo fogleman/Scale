@@ -21,7 +21,7 @@
 #define MIN_ZOOM 64
 #define MAX_ZOOM 137438953472
 
-#define INITIAL_AA 1
+#define INITIAL_AA 2
 #define INITIAL_GAMMA 0.5
 
 #define PAN_FACTOR 64

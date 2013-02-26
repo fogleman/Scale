@@ -42,10 +42,10 @@
         [self.seen removeAllObjects];
         [self.dataCache removeAllObjects];
         [self.maxLookup removeAllObjects];
+        [self.imageCache removeAllObjects];
     }
     if (![model imageCompatible:self.model]) {
         [self.seen removeAllObjects];
-        [self.imageCache removeAllObjects];
     }
     self.model = model;
     self.size = size;
@@ -111,7 +111,7 @@
             max = cachedMax;
         }
         else {
-            data = [Fractal computeTileDataWithMode:model.mode max:model.max zoom:zoom i:i j:j aa:model.aa jx:model.jx jy:model.jy];
+            data = [Fractal computeTileDataWithMode:model.mode max:model.max zoom:zoom i:i j:j aa:model.aa jx:model.jx jy:model.jy ref:cachedData];
             max = model.max;
         }
         NSImage *image = [Fractal computeTileImageWithData:data palette:model.palette];
