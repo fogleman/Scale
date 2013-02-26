@@ -35,6 +35,9 @@
 }
 
 - (void)setModel:(Model *)model size:(CGSize)size {
+    if (model == self.model && size.width == self.size.width && size.height == self.size.height) {
+        return;
+    }
     self.model = model;
     self.size = size;
     self.a = [model screenToTile:CGPointMake(0, size.height) size:size];
