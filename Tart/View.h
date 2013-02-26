@@ -7,11 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Cache.h"
 #import "Model.h"
 
 @interface View : NSView
 
 @property (retain) Model *model;
+@property (retain) Cache *cache;
 @property (assign) CGPoint anchor;
 @property (assign) CGPoint dragPoint;
 

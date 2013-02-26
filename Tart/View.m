@@ -15,8 +15,10 @@
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[NSColor whiteColor] endingColor:[NSColor blackColor]];
-        self.model = [[Model julia] withGradient:gradient];
+        NSArray *colors = [NSArray arrayWithObjects:[Common color:0x580022], [Common color:0xAA2C30], [Common color:0xFFBE8D], [Common color:0x487B7F], [Common color:0x011D24], nil];
+        NSGradient *gradient = [[NSGradient alloc] initWithColors:colors];
+        self.model = [[Model mandelbrot] withGradient:gradient];
+        self.cache = [[Cache alloc] initWithView:self];
     }
     return self;
 }
@@ -29,19 +31,13 @@
     return YES;
 }
 
-- (NSImage *)getTile:(CGPoint)tile {
-    NSData *data;
-    @synchronized(self) {
-        data = [Fractal clComputeTileDataWithMode:self.model.mode max:self.model.max zoom:self.model.zoom i:tile.x j:tile.y aa:self.model.aa jx:self.model.jx jy:self.model.jy];
-    }
-    return [Fractal computeTileImageWithData:data palette:self.model.palette];
-}
-
 - (void)drawRect:(NSRect)dirtyRect {
+    [self.cache setModel:self.model size:self.bounds.size];
     CGSize size = self.bounds.size;
     CGPoint a = [self.model screenToTile:CGPointMake(0, size.height) size:size];
     CGPoint b = [self.model screenToTile:CGPointMake(size.width, 0) size:size];
     [NSBezierPath fillRect:dirtyRect];
+    NSDictionary *hints = [NSDictionary dictionaryWithObject:@(NSImageInterpolationNone) forKey:NSImageHintInterpolation];
     for (long j = a.y; j <= b.y; j++) {
         for (long i = a.x; i <= b.x; i++) {
             CGPoint point = [self.model tileToScreen:CGPointMake(i, j) size:size];
@@ -49,10 +45,26 @@
             if (!CGRectIntersectsRect(dst, dirtyRect)) {
                 continue;
             }
-            NSImage *tile = [self getTile:CGPointMake(i, j)];
+            NSImage *tile = [self.cache getTileWithZoom:self.model.zoom i:i j:j];
             if (tile) {
                 [tile drawInRect:dst fromRect:NSZeroRect operation:NSCompositeCopy fraction:1 respectFlipped:YES hints:nil];
                 continue;
+            }
+            for (long m = 2; m <= 8; m *= 2) {
+                long zoom = self.model.zoom / m;
+                long p = floor((double)i / m);
+                long q = floor((double)j / m);
+                tile = [self.cache getTileWithZoom:zoom i:p j:q];
+                if (tile) {
+                    long size = TILE_SIZE / m;
+                    long dx = i % m;
+                    long dy = j % m;
+                    dx = dx < 0 ? dx + m : dx;
+                    dy = dy < 0 ? dy + m : dy;
+                    NSRect src = NSMakeRect(dx * size, dy * size, size, size);
+                    [tile drawInRect:dst fromRect:src operation:NSCompositeCopy fraction:1 respectFlipped:YES hints:hints];
+                    break;
+                }
             }
         }
     }
@@ -101,6 +113,16 @@
 
 - (void)moveDown:(id)sender {
     self.model = [self.model moveDown];
+    [self setNeedsDisplay:YES];
+}
+
+- (IBAction)onZoomIn:(id)sender {
+    self.model = [self.model zoomIn];
+    [self setNeedsDisplay:YES];
+}
+
+- (IBAction)onZoomOut:(id)sender {
+    self.model = [self.model zoomOut];
     [self setNeedsDisplay:YES];
 }
 
