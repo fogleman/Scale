@@ -20,7 +20,7 @@
         self.view = view;
         self.seen = [NSMutableOrderedSet orderedSet];
         self.dataCache = [NSMutableDictionary dictionary];
-        self.maxLookup = [NSMutableDictionary dictionary];
+        self.maxCache = [NSMutableDictionary dictionary];
         self.imageCache = [NSMutableDictionary dictionary];
     }
     return self;
@@ -28,10 +28,16 @@
 
 - (void)dealloc {
     self.model = nil;
+    self.view = nil;
     self.seen = nil;
     self.dataCache = nil;
-    self.maxLookup = nil;
+    self.maxCache = nil;
     self.imageCache = nil;
+}
+
+- (NSImage *)getTileWithZoom:(long)zoom i:(long)i j:(long)j {
+    NSArray *key = [NSArray arrayWithObjects:@(i), @(j), @(zoom), nil];
+    return [self.imageCache objectForKey:key];
 }
 
 - (void)setModel:(Model *)model size:(CGSize)size {
@@ -41,7 +47,7 @@
     if (![model dataCompatible:self.model]) {
         [self.seen removeAllObjects];
         [self.dataCache removeAllObjects];
-        [self.maxLookup removeAllObjects];
+        [self.maxCache removeAllObjects];
         [self.imageCache removeAllObjects];
     }
     if (![model imageCompatible:self.model]) {
@@ -52,11 +58,6 @@
     self.a = [model screenToTile:CGPointMake(0, size.height) size:size];
     self.b = [model screenToTile:CGPointMake(size.width, 0) size:size];
     [self ensureAll];
-}
-
-- (NSImage *)getTileWithZoom:(long)zoom i:(long)i j:(long)j {
-    NSArray *key = [NSArray arrayWithObjects:@(i), @(j), @(zoom), nil];
-    return [self.imageCache objectForKey:key];
 }
 
 - (void)ensureAll {
@@ -75,29 +76,32 @@
     }
 }
 
+- (BOOL)isKeyStale:(NSArray *)key {
+    long i = ((NSNumber *)[key objectAtIndex:0]).integerValue;
+    long j = ((NSNumber *)[key objectAtIndex:1]).integerValue;
+    long zoom = ((NSNumber *)[key objectAtIndex:2]).integerValue;
+    if (zoom != self.model.zoom) {
+        return YES;
+    }
+    if (i < self.a.x || i > self.b.x) {
+        return YES;
+    }
+    if (j < self.a.y || j > self.b.y) {
+        return YES;
+    }
+    return NO;
+}
+
 - (void)ensureKey:(NSArray *)key {
     if ([self.seen containsObject:key]) {
         return;
     }
     [self.seen addObject:key];
     Model *model = self.model;
-    long i = ((NSNumber *)[key objectAtIndex:0]).integerValue;
-    long j = ((NSNumber *)[key objectAtIndex:1]).integerValue;
-    long zoom = ((NSNumber *)[key objectAtIndex:2]).integerValue;
     NSData *cachedData = [self.dataCache objectForKey:key];
-    int cachedMax = ((NSNumber *)[self.maxLookup objectForKey:key]).intValue;
+    int cachedMax = ((NSNumber *)[self.maxCache objectForKey:key]).intValue;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        BOOL abort = NO;
-        if (zoom != self.model.zoom) {
-            abort = YES;
-        }
-        if (i < self.a.x || i > self.b.x) {
-            abort = YES;
-        }
-        if (j < self.a.y || j > self.b.y) {
-            abort = YES;
-        }
-        if (abort) {
+        if ([self isKeyStale:key]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.seen removeObject:key];
                 [self.view setNeedsDisplay:YES];
@@ -111,6 +115,9 @@
             max = cachedMax;
         }
         else {
+            long i = ((NSNumber *)[key objectAtIndex:0]).integerValue;
+            long j = ((NSNumber *)[key objectAtIndex:1]).integerValue;
+            long zoom = ((NSNumber *)[key objectAtIndex:2]).integerValue;
             data = [Fractal computeTileDataWithMode:model.mode max:model.max zoom:zoom i:i j:j aa:model.aa jx:model.jx jy:model.jy ref:cachedData];
             max = model.max;
         }
@@ -118,7 +125,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([model dataCompatible:self.model]) {
                 [self.dataCache setObject:data forKey:key];
-                [self.maxLookup setObject:@(max) forKey:key];
+                [self.maxCache setObject:@(max) forKey:key];
             }
             else {
                 [self.seen removeObject:key];

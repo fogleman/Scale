@@ -23,6 +23,11 @@
     return self;
 }
 
+- (void)dealloc {
+    self.model = nil;
+    self.cache = nil;
+}
+
 - (BOOL)isFlipped {
     return YES;
 }

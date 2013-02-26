@@ -63,8 +63,8 @@
         model.jx = self.jx;
         model.jy = self.jy;
         model.gamma = self.gamma;
-        model.gradient = [self.gradient copyWithZone:zone];
-        model.palette = [self.palette copyWithZone:zone];
+        model.gradient = self.gradient;
+        model.palette = self.palette;
     }
     return model;
 }
@@ -95,7 +95,7 @@
     if (self.gamma != model.gamma) {
         return NO;
     }
-    if (![self.gradient isEqual:model.gradient]) {
+    if (self.gradient != model.gradient) {
         return NO;
     }
     return YES;

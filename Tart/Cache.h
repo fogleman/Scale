@@ -17,14 +17,14 @@
 @property (retain) View *view;
 @property (retain) NSMutableOrderedSet *seen;
 @property (retain) NSMutableDictionary *dataCache;
-@property (retain) NSMutableDictionary *maxLookup;
+@property (retain) NSMutableDictionary *maxCache;
 @property (retain) NSMutableDictionary *imageCache;
 @property (assign) CGSize size;
 @property (assign) CGPoint a;
 @property (assign) CGPoint b;
 
 - (id)initWithView:(View *)view;
-- (void)setModel:(Model *)model size:(CGSize)size;
 - (NSImage *)getTileWithZoom:(long)zoom i:(long)i j:(long)j;
+- (void)setModel:(Model *)model size:(CGSize)size;
 
 @end
