@@ -11,6 +11,8 @@
 #import "Fractal.h"
 #import "View.h"
 
+#define UNPACK(x, i) (((NSNumber *)[(x) objectAtIndex:(i)]).integerValue)
+
 @implementation Cache
 
 - (id)initWithView:(View *)view {
@@ -77,9 +79,9 @@
 }
 
 - (BOOL)isKeyStale:(NSArray *)key {
-    long i = ((NSNumber *)[key objectAtIndex:0]).integerValue;
-    long j = ((NSNumber *)[key objectAtIndex:1]).integerValue;
-    long zoom = ((NSNumber *)[key objectAtIndex:2]).integerValue;
+    long i = UNPACK(key, 0);
+    long j = UNPACK(key, 1);
+    long zoom = UNPACK(key, 2);
     if (zoom != self.model.zoom) {
         return YES;
     }
@@ -115,9 +117,9 @@
             max = cachedMax;
         }
         else {
-            long i = ((NSNumber *)[key objectAtIndex:0]).integerValue;
-            long j = ((NSNumber *)[key objectAtIndex:1]).integerValue;
-            long zoom = ((NSNumber *)[key objectAtIndex:2]).integerValue;
+            long i = UNPACK(key, 0);
+            long j = UNPACK(key, 1);
+            long zoom = UNPACK(key, 2);
             data = [Fractal computeTileDataWithMode:model.mode max:model.max zoom:zoom i:i j:j aa:model.aa jx:model.jx jy:model.jy ref:cachedData];
             max = model.max;
         }
