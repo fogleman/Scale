@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define TILE_SIZE 64
+#define TILE_SIZE 128
 
 #define MANDELBROT 1
 #define JULIA 2
