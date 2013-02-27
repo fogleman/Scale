@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69314D7316DD937000371379 /* GradientPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69314D6E16DD937000371379 /* GradientPanel.m */; };
+		69314D7416DD937000371379 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69314D7016DD937000371379 /* GradientView.m */; };
+		69314D7516DD937000371379 /* InspectorPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69314D7216DD937000371379 /* InspectorPanel.m */; };
 		69A50F8A16DC35A500BF8A25 /* Cache.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A50F8916DC35A500BF8A25 /* Cache.m */; };
 		69F64D8A16DAEA76003D6DDB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F64D8916DAEA76003D6DDB /* Cocoa.framework */; };
 		69F64D9416DAEA76003D6DDB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 69F64D9216DAEA76003D6DDB /* InfoPlist.strings */; };
@@ -23,6 +26,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		69314D6D16DD937000371379 /* GradientPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPanel.h; sourceTree = "<group>"; };
+		69314D6E16DD937000371379 /* GradientPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPanel.m; sourceTree = "<group>"; };
+		69314D6F16DD937000371379 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		69314D7016DD937000371379 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
+		69314D7116DD937000371379 /* InspectorPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorPanel.h; sourceTree = "<group>"; };
+		69314D7216DD937000371379 /* InspectorPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorPanel.m; sourceTree = "<group>"; };
 		69A50F8816DC35A500BF8A25 /* Cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cache.h; sourceTree = "<group>"; };
 		69A50F8916DC35A500BF8A25 /* Cache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cache.m; sourceTree = "<group>"; };
 		69F64D8616DAEA76003D6DDB /* Tart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +121,12 @@
 				69F64DAE16DAED4B003D6DDB /* Fractal.cl */,
 				69F64DAB16DAED23003D6DDB /* Fractal.h */,
 				69F64DAC16DAED23003D6DDB /* Fractal.m */,
+				69314D6D16DD937000371379 /* GradientPanel.h */,
+				69314D6E16DD937000371379 /* GradientPanel.m */,
+				69314D6F16DD937000371379 /* GradientView.h */,
+				69314D7016DD937000371379 /* GradientView.m */,
+				69314D7116DD937000371379 /* InspectorPanel.h */,
+				69314D7216DD937000371379 /* InspectorPanel.m */,
 				69F64D9E16DAEA76003D6DDB /* MainMenu.xib */,
 				69F64DB316DB0D4B003D6DDB /* Model.h */,
 				69F64DB416DB0D4B003D6DDB /* Model.m */,
@@ -206,6 +221,9 @@
 				69F64DB216DAF3A4003D6DDB /* Common.m in Sources */,
 				69F64DB516DB0D4B003D6DDB /* Model.m in Sources */,
 				69A50F8A16DC35A500BF8A25 /* Cache.m in Sources */,
+				69314D7316DD937000371379 /* GradientPanel.m in Sources */,
+				69314D7416DD937000371379 /* GradientView.m in Sources */,
+				69314D7516DD937000371379 /* InspectorPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

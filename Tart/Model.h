@@ -35,7 +35,13 @@
 - (CGPoint)pointToScreen:(CGPoint)point size:(CGSize)size;
 - (CGPoint)screenToPoint:(CGPoint)point size:(CGSize)size;
 
+- (Model *)withCenter:(CGPoint)point;
+- (Model *)withJulia:(CGPoint)point;
+- (Model *)withMax:(int)max;
+- (Model *)withZoom:(long)zoom;
 - (Model *)withGradient:(NSGradient *)gradient;
+- (Model *)withGamma:(double)gamma;
+- (Model *)withAntialiasing:(int)aa;
 - (Model *)moreDetail;
 - (Model *)lessDetail;
 - (Model *)zoomIn;

@@ -18,7 +18,7 @@
     Model *model = [[Model alloc] init];
     model.mode = MANDELBROT;
     model.max = INITIAL_DETAIL;
-    model.zoom = INITIAL_ZOOM * 8;
+    model.zoom = INITIAL_ZOOM;
     model.x = -0.5;
     model.y = 0;
     model.aa = INITIAL_AA;
@@ -146,10 +146,50 @@
     }
 }
 
+- (Model *)withCenter:(CGPoint)point {
+    Model *model = [self copy];
+    model.x = point.x;
+    model.y = point.y;
+    return model;
+}
+
+- (Model *)withJulia:(CGPoint)point {
+    Model *model = [self copy];
+    model.jx = point.x;
+    model.jy = point.y;
+    return model;
+}
+
+- (Model *)withMax:(int)max {
+    Model *model = [self copy];
+    model.max = max;
+    model.palette = nil;
+    return model;
+}
+
+- (Model *)withZoom:(long)zoom {
+    Model *model = [self copy];
+    model.zoom = zoom;
+    return model;
+}
+
 - (Model *)withGradient:(NSGradient *)gradient {
     Model *model = [self copy];
     model.gradient = gradient;
     model.palette = nil;
+    return model;
+}
+
+- (Model *)withGamma:(double)gamma {
+    Model *model = [self copy];
+    model.gamma = gamma;
+    model.palette = nil;
+    return model;
+}
+
+- (Model *)withAntialiasing:(int)aa {
+    Model *model = [self copy];
+    model.aa = aa;
     return model;
 }
 

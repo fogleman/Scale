@@ -36,7 +36,27 @@
     return YES;
 }
 
+- (void)updateLabels {
+    self.inspectorPanel.centerX.doubleValue = self.model.x;
+    self.inspectorPanel.centerY.doubleValue = self.model.y;
+    self.inspectorPanel.zoom.doubleValue = log(self.model.zoom) / log(2);
+    self.inspectorPanel.detail.doubleValue = log(self.model.max) / log(2);
+    if (self.model.mode == JULIA) {
+        self.inspectorPanel.juliaX.doubleValue = self.model.jx;
+        self.inspectorPanel.juliaY.doubleValue = self.model.jy;
+        [self.inspectorPanel.juliaX setEnabled:YES];
+        [self.inspectorPanel.juliaY setEnabled:YES];
+    }
+    else {
+        self.inspectorPanel.juliaX.stringValue = @"";
+        self.inspectorPanel.juliaY.stringValue = @"";
+        [self.inspectorPanel.juliaX setEnabled:NO];
+        [self.inspectorPanel.juliaY setEnabled:NO];
+    }
+}
+
 - (void)drawRect:(NSRect)dirtyRect {
+    [self updateLabels];
     [self.cache setModel:self.model size:self.bounds.size];
     CGSize size = self.bounds.size;
     CGPoint a = [self.model screenToTile:CGPointMake(0, size.height) size:size];
@@ -138,6 +158,47 @@
 
 - (IBAction)onLessDetail:(id)sender {
     self.model = [self.model lessDetail];
+    [self setNeedsDisplay:YES];
+}
+
+- (IBAction)onColors:(id)sender {
+    if (!self.gradientPanel.isVisible) {
+        [self.gradientPanel makeKeyAndOrderFront:nil];
+    }
+    else {
+        [self.gradientPanel orderOut:nil];
+    }
+}
+
+- (IBAction)onInspector:(id)sender {
+    if (!self.inspectorPanel.isVisible) {
+        [self.inspectorPanel makeKeyAndOrderFront:nil];
+    }
+    else {
+        [self.inspectorPanel orderOut:nil];
+    }
+}
+
+- (void)onGradient:(NSGradient *)gradient {
+    self.model = [self.model withGradient:gradient];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)onGamma:(double)gamma {
+    self.model = [self.model withGamma:gamma];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)onAntialiasing:(int)aa {
+    self.model = [self.model withAntialiasing:aa];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)onInspector {
+    self.model = [self.model withCenter:CGPointMake(self.inspectorPanel.centerX.doubleValue, self.inspectorPanel.centerY.doubleValue)];
+    self.model = [self.model withJulia:CGPointMake(self.inspectorPanel.juliaX.doubleValue, self.inspectorPanel.juliaY.doubleValue)];
+    self.model = [self.model withZoom:pow(2, self.inspectorPanel.zoom.intValue)];
+    self.model = [self.model withMax:pow(2, self.inspectorPanel.detail.doubleValue)];
     [self setNeedsDisplay:YES];
 }
 

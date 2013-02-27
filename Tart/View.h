@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Cache.h"
+#import "GradientPanel.h"
+#import "InspectorPanel.h"
 #import "Model.h"
 
 @interface View : NSView
@@ -16,5 +18,13 @@
 @property (retain) Cache *cache;
 @property (assign) CGPoint anchor;
 @property (assign) CGPoint dragPoint;
+
+@property (assign) IBOutlet GradientPanel *gradientPanel;
+@property (assign) IBOutlet InspectorPanel *inspectorPanel;
+
+- (void)onGradient:(NSGradient *)gradient;
+- (void)onGamma:(double)gamma;
+- (void)onAntialiasing:(int)aa;
+- (void)onInspector;
 
 @end

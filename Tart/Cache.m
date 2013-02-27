@@ -108,7 +108,7 @@
     Model *model = self.model;
     NSData *cachedData = [self.dataCache objectForKey:key];
     int cachedMax = ((NSNumber *)[self.maxCache objectForKey:key]).intValue;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if ([self isKeyStale:key]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.seen removeObject:key];
@@ -123,6 +123,7 @@
             max = cachedMax;
         }
         else {
+            NSLog(@"tile");
             long i = UNPACK(key, 0);
             long j = UNPACK(key, 1);
             long zoom = UNPACK(key, 2);
