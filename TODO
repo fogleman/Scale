@@ -1,5 +1,4 @@
 * Julia set explorer
-* Max cache size
 * Fix max detail increase bug
 * More palettes with names or previews
 * Persist tool window locations

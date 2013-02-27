@@ -158,9 +158,7 @@
             [keys addObject:key];
         }
     }
-    for (NSArray *key in keys) {
-        [cache removeObject:key];
-    }
+    [cache removeObjectsForKeys:keys];
 }
 
 - (void)purgeCaches {
