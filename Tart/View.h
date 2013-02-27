@@ -18,9 +18,16 @@
 @property (retain) Cache *cache;
 @property (assign) CGPoint anchor;
 @property (assign) CGPoint dragPoint;
+@property (assign) BOOL cancelSave;
 
 @property (assign) IBOutlet GradientPanel *gradientPanel;
 @property (assign) IBOutlet InspectorPanel *inspectorPanel;
+@property (assign) IBOutlet NSView *saveAccessoryView;
+@property (assign) IBOutlet NSTextField *saveWidth;
+@property (assign) IBOutlet NSTextField *saveHeight;
+@property (assign) IBOutlet NSPopUpButton *saveAntialiasing;
+@property (assign) IBOutlet NSWindow *saveProgressWindow;
+@property (assign) IBOutlet NSProgressIndicator *saveProgressIndicator;
 
 - (void)onGradient:(NSGradient *)gradient;
 - (void)onGamma:(double)gamma;

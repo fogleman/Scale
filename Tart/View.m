@@ -215,4 +215,110 @@
     [self setNeedsDisplay:YES];
 }
 
+- (void)doSave:(NSURL *)url {
+    self.cancelSave = NO;
+    double w = self.saveWidth.intValue;
+    double h = self.saveHeight.intValue;
+    double p = w / self.bounds.size.width;
+    Model *model = [self.model copy];
+    model = [model withZoom:model.zoom * p];
+    model = [model withAntialiasing:(int)self.saveAntialiasing.selectedTag];
+    CGSize size = CGSizeMake(w, h);
+    CGPoint a = [model screenToTile:CGPointMake(0, h) size:size];
+    CGPoint b = [model screenToTile:CGPointMake(w, 0) size:size];
+    self.saveProgressIndicator.doubleValue = 0;
+    self.saveProgressIndicator.minValue = 0;
+    self.saveProgressIndicator.maxValue = (b.x - a.x + 1) * (b.y - a.y + 1);
+    [NSApp beginSheet:self.saveProgressWindow modalForWindow:self.window modalDelegate:self didEndSelector:@selector(saveProgressWindowDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSMutableDictionary *tiles = [NSMutableDictionary dictionary];
+        dispatch_group_t group = dispatch_group_create();
+        for (long j = a.y; j <= b.y; j++) {
+            for (long i = a.x; i <= b.x; i++) {
+                dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                    if (self.cancelSave) {
+                        return;
+                    }
+                    NSData *data = [Fractal computeTileDataWithMode:model.mode max:model.max zoom:model.zoom i:i j:j aa:model.aa jx:model.jx jy:model.jy ref:nil];
+                    NSImage *tile = [Fractal computeTileImageWithData:data palette:model.palette];
+                    NSArray *key = [NSArray arrayWithObjects:@(i), @(j), nil];
+                    @synchronized(tiles) {
+                        [tiles setObject:tile forKey:key];
+                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.saveProgressIndicator.doubleValue += 1;
+                    });
+                });
+            }
+        }
+        dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+        dispatch_release(group);
+        if (!self.cancelSave) {
+            NSImage *image = [[NSImage alloc] initWithSize:size];
+            [image lockFocusFlipped:YES];
+            for (long j = a.y; j <= b.y; j++) {
+                for (long i = a.x; i <= b.x; i++) {
+                    NSArray *key = [NSArray arrayWithObjects:@(i), @(j), nil];
+                    NSImage *tile = [tiles objectForKey:key];
+                    CGPoint point = [model tileToScreen:CGPointMake(i, j) size:size];
+                    NSRect dst = NSMakeRect(point.x, point.y, TILE_SIZE, TILE_SIZE);
+                    [tile drawInRect:dst fromRect:NSZeroRect operation:NSCompositeCopy fraction:1 respectFlipped:YES hints:nil];
+                }
+            }
+            [image unlockFocus];
+            NSBitmapImageRep *bitmap = [NSBitmapImageRep imageRepWithData:[image TIFFRepresentation]];
+            NSData *data = [bitmap representationUsingType:NSPNGFileType properties:nil];
+            [data writeToURL:url atomically:NO];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NSApp endSheet:self.saveProgressWindow];
+        });
+    });
+}
+
+- (void)saveProgressWindowDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    [self.saveProgressWindow orderOut:self];
+}
+
+- (IBAction)onCancelSave:(id)sender {
+    self.cancelSave = YES;
+}
+
+- (void)saveDocument:(id)sender {
+    NSSavePanel *panel = [NSSavePanel savePanel];
+    self.saveWidth.stringValue = [NSString stringWithFormat:@"%d", (int)self.bounds.size.width];
+    self.saveHeight.stringValue = [NSString stringWithFormat:@"%d", (int)self.bounds.size.height];
+    [self.saveAntialiasing selectItemWithTag:self.model.aa];
+    panel.accessoryView = self.saveAccessoryView;
+    panel.allowedFileTypes = [NSArray arrayWithObjects:@"png", nil];
+    [panel beginSheetModalForWindow:self.window completionHandler:^(NSInteger returnCode) {
+        [panel makeFirstResponder:panel];
+        if (returnCode == NSOKButton) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self doSave:panel.URL];
+            });
+        }
+    }];
+}
+
+- (IBAction)onSaveChange:(id)sender {
+    int width = self.saveWidth.intValue;
+    int height = self.saveHeight.intValue;
+    if (width == 0) {
+        width = self.bounds.size.width;
+    }
+    if (height == 0) {
+        height = self.bounds.size.height;
+    }
+    double aspect = self.bounds.size.width / self.bounds.size.height;
+    if (sender == self.saveWidth) {
+        height = round(width / aspect);
+    }
+    if (sender == self.saveHeight) {
+        width = round(height * aspect);
+    }
+    self.saveWidth.stringValue = [NSString stringWithFormat:@"%d", width];
+    self.saveHeight.stringValue = [NSString stringWithFormat:@"%d", height];
+}
+
 @end
