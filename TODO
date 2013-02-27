@@ -1,0 +1,9 @@
+* Julia set explorer
+* Max cache size
+* Fix max detail increase bug
+* Cancel tile computes using barrier
+* More palettes with names or previews
+* Persist tool window locations
+* Retina support and large icons
+* App name and icon
+* Save user palettes
