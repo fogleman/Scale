@@ -48,6 +48,7 @@
 - (Model *)withAntialiasing:(int)aa;
 - (Model *)moreDetail;
 - (Model *)lessDetail;
+- (Model *)resetZoom;
 - (Model *)zoomIn;
 - (Model *)zoomInAtPoint:(CGPoint)point size:(CGSize)size;
 - (Model *)zoomOut;

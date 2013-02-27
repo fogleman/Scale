@@ -154,6 +154,11 @@
     [self setNeedsDisplay:YES];
 }
 
+- (IBAction)onResetZoom:(id)sender {
+    self.model = [self.model resetZoom];
+    [self setNeedsDisplay:YES];
+}
+
 - (IBAction)onZoomIn:(id)sender {
     self.model = [self.model zoomIn];
     [self setNeedsDisplay:YES];

@@ -280,6 +280,14 @@
     return model;
 }
 
+- (Model *)resetZoom {
+    Model *model = [self copy];
+    model.zoom = INITIAL_ZOOM;
+    model.x = model.mode == MANDELBROT ? -0.5 : 0;
+    model.y = 0;
+    return model;
+}
+
 - (Model *)zoomIn {
     Model *model = [self copy];
     model.zoom = MIN(self.zoom * 2, MAX_ZOOM);
