@@ -59,11 +59,11 @@
     self.size = size;
     self.a = [model screenToTile:CGPointMake(0, size.height) size:size];
     self.b = [model screenToTile:CGPointMake(size.width, 0) size:size];
-    int n = INITIAL_ZOOM / TILE_SIZE * 2;
-    int m = -(n + 1);
-    CGPoint a = CGPointMake(m, m);
-    CGPoint b = CGPointMake(n, n);
-    [self ensureKeysWithZoom:INITIAL_ZOOM a:a b:b];
+//    int n = INITIAL_ZOOM / TILE_SIZE * 2;
+//    int m = -(n + 1);
+//    CGPoint a = CGPointMake(m, m);
+//    CGPoint b = CGPointMake(n, n);
+//    [self ensureKeysWithZoom:INITIAL_ZOOM a:a b:b];
     [self ensureKeysWithZoom:self.model.zoom a:self.a b:self.b];
 }
 
@@ -85,9 +85,9 @@
     long i = UNPACK(key, 0);
     long j = UNPACK(key, 1);
     long zoom = UNPACK(key, 2);
-    if (zoom == INITIAL_ZOOM) {
-        return NO;
-    }
+//    if (zoom == INITIAL_ZOOM) {
+//        return NO;
+//    }
     if (zoom != self.model.zoom) {
         return YES;
     }
@@ -105,10 +105,18 @@
         return;
     }
     [self.seen addObject:key];
+    long i = UNPACK(key, 0);
+    long j = UNPACK(key, 1);
+    long zoom = UNPACK(key, 2);
     Model *model = self.model;
     NSData *cachedData = [self.dataCache objectForKey:key];
     int cachedMax = ((NSNumber *)[self.maxCache objectForKey:key]).intValue;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    if (cachedData && cachedMax >= model.max) {
+        NSImage *image = [Fractal computeTileImageWithData:cachedData palette:model.palette];
+        [self.imageCache setObject:image forKey:key];
+        return;
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         if ([self isKeyStale:key]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.seen removeObject:key];
@@ -116,25 +124,12 @@
             });
             return;
         }
-        NSData *data;
-        int max;
-        if (cachedData && cachedMax >= model.max) {
-            data = cachedData;
-            max = cachedMax;
-        }
-        else {
-            NSLog(@"tile");
-            long i = UNPACK(key, 0);
-            long j = UNPACK(key, 1);
-            long zoom = UNPACK(key, 2);
-            data = [Fractal computeTileDataWithMode:model.mode max:model.max zoom:zoom i:i j:j aa:model.aa jx:model.jx jy:model.jy ref:cachedData];
-            max = model.max;
-        }
+        NSData *data = [Fractal computeTileDataWithMode:model.mode max:model.max zoom:zoom i:i j:j aa:model.aa jx:model.jx jy:model.jy ref:cachedData];
         NSImage *image = [Fractal computeTileImageWithData:data palette:model.palette];
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([model dataCompatible:self.model]) {
                 [self.dataCache setObject:data forKey:key];
-                [self.maxCache setObject:@(max) forKey:key];
+                [self.maxCache setObject:@(model.max) forKey:key];
             }
             else {
                 [self.seen removeObject:key];
