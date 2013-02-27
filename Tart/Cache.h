@@ -15,7 +15,7 @@
 
 @property (retain) Model *model;
 @property (retain) View *view;
-@property (retain) NSMutableOrderedSet *seen;
+@property (retain) NSMutableSet *seen;
 @property (retain) NSMutableDictionary *dataCache;
 @property (retain) NSMutableDictionary *maxCache;
 @property (retain) NSMutableDictionary *imageCache;

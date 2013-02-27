@@ -12,6 +12,7 @@
 #import "View.h"
 
 #define UNPACK(x, i) (((NSNumber *)[(x) objectAtIndex:(i)]).integerValue)
+#define LOOKUP(x, i) (((NSNumber *)[(x) objectForKey:(i)]).integerValue)
 
 @implementation Cache
 
@@ -20,7 +21,7 @@
     if (self) {
         self.model = nil;
         self.view = view;
-        self.seen = [NSMutableOrderedSet orderedSet];
+        self.seen = [NSMutableSet set];
         self.dataCache = [NSMutableDictionary dictionary];
         self.maxCache = [NSMutableDictionary dictionary];
         self.imageCache = [NSMutableDictionary dictionary];
@@ -40,7 +41,7 @@
 }
 
 - (NSImage *)getTileWithZoom:(long)zoom i:(long)i j:(long)j {
-    NSArray *key = [NSArray arrayWithObjects:@(i), @(j), @(zoom), nil];
+    NSArray *key = @[@(i), @(j), @(zoom)];
     return [self.imageCache objectForKey:key];
 }
 
@@ -65,11 +66,6 @@
     self.size = size;
     self.a = [model screenToTile:CGPointMake(0, size.height) size:size];
     self.b = [model screenToTile:CGPointMake(size.width, 0) size:size];
-//    int n = INITIAL_ZOOM / TILE_SIZE * 2;
-//    int m = -(n + 1);
-//    CGPoint a = CGPointMake(m, m);
-//    CGPoint b = CGPointMake(n, n);
-//    [self ensureKeysWithZoom:INITIAL_ZOOM a:a b:b];
     [self ensureKeysWithZoom:self.model.zoom a:self.a b:self.b];
 }
 
@@ -77,7 +73,7 @@
     NSMutableArray *keys = [NSMutableArray array];
     for (long j = a.y; j <= b.y; j++) {
         for (long i = a.x; i <= b.x; i++) {
-            NSArray *key = [NSArray arrayWithObjects:@(i), @(j), @(zoom), nil];
+            NSArray *key = @[@(i), @(j), @(zoom)];
             [keys addObject:key];
         }
     }
@@ -91,9 +87,6 @@
     long i = UNPACK(key, 0);
     long j = UNPACK(key, 1);
     long zoom = UNPACK(key, 2);
-//    if (zoom == INITIAL_ZOOM) {
-//        return NO;
-//    }
     if (zoom != self.model.zoom) {
         return YES;
     }
@@ -116,7 +109,7 @@
     long zoom = UNPACK(key, 2);
     Model *model = self.model;
     NSData *cachedData = [self.dataCache objectForKey:key];
-    int cachedMax = ((NSNumber *)[self.maxCache objectForKey:key]).intValue;
+    int cachedMax = LOOKUP(self.maxCache, key);
     if (cachedData && cachedMax >= model.max) {
         NSImage *image = [Fractal computeTileImageWithData:cachedData palette:model.palette];
         [self.imageCache setObject:image forKey:key];
