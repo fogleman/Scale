@@ -18,4 +18,8 @@
 
 + (NSImage *)computeTileImageWithData:(NSData *)data palette:(NSData *)palette;
 
++ (CGPoint)randomMandelbrot;
+
++ (CGRect)randomJulia;
+
 @end

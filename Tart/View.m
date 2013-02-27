@@ -15,9 +15,7 @@
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        NSArray *colors = [NSArray arrayWithObjects:[Common color:0x580022], [Common color:0xAA2C30], [Common color:0xFFBE8D], [Common color:0x487B7F], [Common color:0x011D24], nil];
-        NSGradient *gradient = [[NSGradient alloc] initWithColors:colors];
-        self.model = [[Model mandelbrot] withGradient:gradient];
+        self.model = [Model mandelbrot];
         self.cache = [[Cache alloc] initWithView:self];
     }
     return self;
@@ -138,6 +136,21 @@
 
 - (void)moveDown:(id)sender {
     self.model = [self.model moveDown];
+    [self setNeedsDisplay:YES];
+}
+
+- (IBAction)onMandelbrot:(id)sender {
+    self.model = [[Model mandelbrot] withGradient:self.model.gradient];
+    [self setNeedsDisplay:YES];
+}
+
+- (IBAction)onJulia:(id)sender {
+    self.model = [[Model julia] withGradient:self.model.gradient];
+    [self setNeedsDisplay:YES];
+}
+
+- (IBAction)onRandom:(id)sender {
+    self.model = [[Model random] withGradient:self.model.gradient];
     [self setNeedsDisplay:YES];
 }
 

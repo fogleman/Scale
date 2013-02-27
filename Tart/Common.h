@@ -26,6 +26,9 @@
 
 #define PAN_FACTOR 64
 
+#define RANDOM_STEPS 4
+#define RANDOM_DETAIL 256
+
 @interface Common : NSObject
 
 + (void)shuffleArray:(NSMutableArray *)array;

@@ -165,4 +165,81 @@ void julia(int max, int width, int height, double wx, double wy, double ww, doub
     return tile;
 }
 
++ (CGPoint)randomMandelbrot {
+    int size = TILE_SIZE;
+    int count = size * size;
+    double wx = -2;
+    double wy = -2;
+    double ww = 4;
+    double wh = 4;
+    double x = 0;
+    double y = 0;
+    unsigned short *data = malloc(sizeof(unsigned short) * count);
+    for (int n = 0; n < RANDOM_STEPS; n++) {
+        mandelbrot(RANDOM_DETAIL, size, size, wx, wy, ww, wh, data, NULL);
+        int hi = 0;
+        for (int i = 0; i < count; i++) {
+            hi = MAX(hi, data[i]);
+        }
+        int threshold = hi / 2;
+        int index;
+        while (1) {
+            index = arc4random_uniform(count);
+            if (data[index] >= threshold) {
+                break;
+            }
+        }
+        double i = index % size;
+        double j = index / size;
+        x = wx + ww * (i / size);
+        y = wy + wh - wh * (j / size);
+        ww /= 2;
+        wh /= 2;
+        wx = x - ww / 2;
+        wy = y - wh / 2;
+    }
+    free(data);
+    return CGPointMake(x, y);
+}
+
++ (CGRect)randomJulia {
+    CGPoint point = [Fractal randomMandelbrot];
+    int size = TILE_SIZE;
+    int count = size * size;
+    double wx = -2;
+    double wy = -2;
+    double ww = 4;
+    double wh = 4;
+    double jx = point.x;
+    double jy = point.y;
+    double x = 0;
+    double y = 0;
+    unsigned short *data = malloc(sizeof(unsigned short) * count);
+    for (int n = 0; n < RANDOM_STEPS; n++) {
+        julia(RANDOM_DETAIL, size, size, wx, wy, ww, wh, jx, jy, data, NULL);
+        int hi = 0;
+        for (int i = 0; i < count; i++) {
+            hi = MAX(hi, data[i]);
+        }
+        int threshold = hi / 2;
+        int index;
+        while (1) {
+            index = arc4random_uniform(count);
+            if (data[index] >= threshold) {
+                break;
+            }
+        }
+        double i = index % size;
+        double j = index / size;
+        x = wx + ww * (i / size);
+        y = wy + wh - wh * (j / size);
+        ww /= 2;
+        wh /= 2;
+        wx = x - ww / 2;
+        wy = y - wh / 2;
+    }
+    free(data);
+    return CGRectMake(x, y, jx, jy);
+}
+
 @end
