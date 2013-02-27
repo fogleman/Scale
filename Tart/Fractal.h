@@ -10,6 +10,8 @@
 
 @interface Fractal : NSObject
 
++ (void)setCancelFlag:(BOOL)flag;
+
 + (NSData *)computePaletteWithGradient:(NSGradient *)gradient size:(int)size gamma:(double)gamma;
 
 + (NSData *)computeTileDataWithMode:(int)mode max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(double)jx jy:(double)jy ref:(NSData *)ref;

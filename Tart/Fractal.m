@@ -11,6 +11,8 @@
 #import "OpenCL/OpenCL.h"
 #import "Fractal.cl.h"
 
+static BOOL cancel = NO;
+
 void mandelbrot(int max, int width, int height, double wx, double wy, double ww, double wh, unsigned short *data, const unsigned short *ref) {
     int index = 0;
     double dx = ww / width;
@@ -33,6 +35,9 @@ void mandelbrot(int max, int width, int height, double wx, double wy, double ww,
                     iteration++;
                 }
                 data[index] = iteration == max ? 0 : iteration;
+                if (cancel) {
+                    return;
+                }
             }
             index++;
             x0 += dx;
@@ -63,6 +68,9 @@ void julia(int max, int width, int height, double wx, double wy, double ww, doub
                     iteration++;
                 }
                 data[index] = iteration == max ? 0 : iteration;
+                if (cancel) {
+                    return;
+                }
             }
             index++;
             x0 += dx;
@@ -72,6 +80,12 @@ void julia(int max, int width, int height, double wx, double wy, double ww, doub
 }
 
 @implementation Fractal
+
++ (void)setCancelFlag:(BOOL)flag {
+    @synchronized(self) {
+        cancelFlag = flag;
+    }
+}
 
 + (NSData *)computePaletteWithGradient:(NSGradient *)gradient size:(int)size gamma:(double)gamma {
     NSImage *image = [[NSImage alloc] initWithSize:CGSizeMake(size, 1)];

@@ -22,6 +22,7 @@
 @property (assign) CGSize size;
 @property (assign) CGPoint a;
 @property (assign) CGPoint b;
+@property (assign) dispatch_queue_t queue;
 
 - (id)initWithView:(View *)view;
 - (NSImage *)getTileWithZoom:(long)zoom i:(long)i j:(long)j;

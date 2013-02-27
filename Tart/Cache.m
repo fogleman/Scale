@@ -24,6 +24,7 @@
         self.dataCache = [NSMutableDictionary dictionary];
         self.maxCache = [NSMutableDictionary dictionary];
         self.imageCache = [NSMutableDictionary dictionary];
+        self.queue = dispatch_queue_create('com.michaelfogleman.Tart.Cache', DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
 }
@@ -35,6 +36,7 @@
     self.dataCache = nil;
     self.maxCache = nil;
     self.imageCache = nil;
+    dispatch_release(self.queue);
 }
 
 - (NSImage *)getTileWithZoom:(long)zoom i:(long)i j:(long)j {
@@ -51,6 +53,10 @@
         [self.dataCache removeAllObjects];
         [self.maxCache removeAllObjects];
         [self.imageCache removeAllObjects];
+        [Fractal setCancelFlag:YES];
+        dispatch_barrier_async(self.queue, ^{
+            [Fractal setCancelFlag:NO];
+        });
     }
     if (![model imageCompatible:self.model]) {
         [self.seen removeAllObjects];
@@ -116,7 +122,7 @@
         [self.imageCache setObject:image forKey:key];
         return;
     }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    dispatch_async(self.queue, ^{
         if ([self isKeyStale:key]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.seen removeObject:key];
