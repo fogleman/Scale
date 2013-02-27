@@ -66,6 +66,7 @@
     self.size = size;
     self.a = [model screenToTile:CGPointMake(0, size.height) size:size];
     self.b = [model screenToTile:CGPointMake(size.width, 0) size:size];
+    [self purgeCaches];
     [self ensureKeysWithZoom:self.model.zoom a:self.a b:self.b];
 }
 
@@ -83,20 +84,26 @@
     }
 }
 
-- (BOOL)isKeyStale:(NSArray *)key {
+- (BOOL)isKeyVisible:(NSArray *)key {
     long i = UNPACK(key, 0);
     long j = UNPACK(key, 1);
     long zoom = UNPACK(key, 2);
     if (zoom != self.model.zoom) {
-        return YES;
+        return NO;
     }
     if (i < self.a.x || i > self.b.x) {
-        return YES;
+        return NO;
     }
     if (j < self.a.y || j > self.b.y) {
-        return YES;
+        return NO;
     }
-    return NO;
+    return YES;
+}
+
+- (BOOL)isKeyStale:(NSArray *)key {
+    // TODO: synchronize?
+    // TODO: check model compatibility
+    return ![self isKeyVisible:key];
 }
 
 - (void)ensureKey:(NSArray *)key {
@@ -142,6 +149,28 @@
             [self.view setNeedsDisplay:YES];
         });
     });
+}
+
+- (void)purgeCache:(NSMutableDictionary *)cache {
+    NSMutableArray *keys = [NSMutableArray array];
+    for (NSArray *key in cache) {
+        if (![self isKeyVisible:key]) {
+            [keys addObject:key];
+        }
+    }
+    for (NSArray *key in keys) {
+        [cache removeObject:key];
+    }
+}
+
+- (void)purgeCaches {
+    if (self.dataCache.count > MAX_TILES) {
+        [self purgeCache:self.dataCache];
+        [self purgeCache:self.maxCache];
+    }
+    if (self.imageCache.count > MAX_TILES) {
+        [self purgeCache:self.imageCache];
+    }
 }
 
 @end

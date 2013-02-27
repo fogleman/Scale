@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define TILE_SIZE 128
+#define MAX_TILES 4096
 
 #define MANDELBROT 1
 #define JULIA 2
