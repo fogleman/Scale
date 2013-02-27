@@ -62,6 +62,13 @@
     if (![model imageCompatible:self.model]) {
         [self.seen removeAllObjects];
     }
+    if (model.max > self.model.max) {
+        [self.seen removeAllObjects];
+        [Fractal setCancelFlag:YES];
+        dispatch_barrier_async(self.queue, ^{
+            [Fractal setCancelFlag:NO];
+        });
+    }
     self.model = model;
     self.size = size;
     self.a = [model screenToTile:CGPointMake(0, size.height) size:size];
