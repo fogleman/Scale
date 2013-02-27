@@ -18,7 +18,7 @@
     Model *model = [[Model alloc] init];
     model.mode = MANDELBROT;
     model.max = INITIAL_DETAIL;
-    model.zoom = INITIAL_ZOOM;
+    model.zoom = INITIAL_ZOOM * 8;
     model.x = -0.5;
     model.y = 0;
     model.aa = INITIAL_AA;

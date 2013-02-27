@@ -59,16 +59,19 @@
     self.size = size;
     self.a = [model screenToTile:CGPointMake(0, size.height) size:size];
     self.b = [model screenToTile:CGPointMake(size.width, 0) size:size];
-    [self ensureAll];
+    int n = INITIAL_ZOOM / TILE_SIZE * 2;
+    int m = -(n + 1);
+    CGPoint a = CGPointMake(m, m);
+    CGPoint b = CGPointMake(n, n);
+    [self ensureKeysWithZoom:INITIAL_ZOOM a:a b:b];
+    [self ensureKeysWithZoom:self.model.zoom a:self.a b:self.b];
 }
 
-- (void)ensureAll {
-    CGPoint a = self.a;
-    CGPoint b = self.b;
+- (void)ensureKeysWithZoom:(long)zoom a:(CGPoint)a b:(CGPoint)b {
     NSMutableArray *keys = [NSMutableArray array];
     for (long j = a.y; j <= b.y; j++) {
         for (long i = a.x; i <= b.x; i++) {
-            NSArray *key = [NSArray arrayWithObjects:@(i), @(j), @(self.model.zoom), nil];
+            NSArray *key = [NSArray arrayWithObjects:@(i), @(j), @(zoom), nil];
             [keys addObject:key];
         }
     }
@@ -82,6 +85,9 @@
     long i = UNPACK(key, 0);
     long j = UNPACK(key, 1);
     long zoom = UNPACK(key, 2);
+    if (zoom == INITIAL_ZOOM) {
+        return NO;
+    }
     if (zoom != self.model.zoom) {
         return YES;
     }

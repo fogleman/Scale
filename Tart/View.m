@@ -17,7 +17,7 @@
     if (self) {
         NSArray *colors = [NSArray arrayWithObjects:[Common color:0x580022], [Common color:0xAA2C30], [Common color:0xFFBE8D], [Common color:0x487B7F], [Common color:0x011D24], nil];
         NSGradient *gradient = [[NSGradient alloc] initWithColors:colors];
-        self.model = [[Model julia] withGradient:gradient];
+        self.model = [[Model mandelbrot] withGradient:gradient];
         self.cache = [[Cache alloc] initWithView:self];
     }
     return self;

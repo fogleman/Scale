@@ -13,7 +13,7 @@
 #define MANDELBROT 1
 #define JULIA 2
 
-#define INITIAL_DETAIL 512
+#define INITIAL_DETAIL 256
 #define MIN_DETAIL 16
 #define MAX_DETAIL 65536
 
