@@ -140,17 +140,17 @@
 }
 
 - (IBAction)onMandelbrot:(id)sender {
-    self.model = [[Model mandelbrot] withGradient:self.model.gradient];
+    self.model = [self.model withMandelbrot];
     [self setNeedsDisplay:YES];
 }
 
 - (IBAction)onJulia:(id)sender {
-    self.model = [[Model julia] withGradient:self.model.gradient];
+    self.model = [self.model withJulia];
     [self setNeedsDisplay:YES];
 }
 
 - (IBAction)onRandom:(id)sender {
-    self.model = [[Model random] withGradient:self.model.gradient];
+    self.model = [self.model withRandom];
     [self setNeedsDisplay:YES];
 }
 
@@ -209,7 +209,7 @@
 
 - (void)onInspector {
     self.model = [self.model withCenter:CGPointMake(self.inspectorPanel.centerX.doubleValue, self.inspectorPanel.centerY.doubleValue)];
-    self.model = [self.model withJulia:CGPointMake(self.inspectorPanel.juliaX.doubleValue, self.inspectorPanel.juliaY.doubleValue)];
+    self.model = [self.model withJuliaSeed:CGPointMake(self.inspectorPanel.juliaX.doubleValue, self.inspectorPanel.juliaY.doubleValue)];
     self.model = [self.model withZoom:pow(2, self.inspectorPanel.zoom.intValue)];
     self.model = [self.model withMax:pow(2, self.inspectorPanel.detail.doubleValue)];
     [self setNeedsDisplay:YES];

@@ -170,6 +170,55 @@
     }
 }
 
+- (Model *)withMandelbrot {
+    Model *model = [self copy];
+    model.mode = MANDELBROT;
+    model.max = INITIAL_DETAIL;
+    model.zoom = INITIAL_ZOOM;
+    model.x = -0.5;
+    model.y = 0;
+    model.jx = 0;
+    model.jy = 0;
+    model.palette = nil;
+    return model;
+}
+
+- (Model *)withJulia {
+    CGPoint point = [Fractal randomMandelbrot];
+    Model *model = [self copy];
+    model.mode = JULIA;
+    model.max = INITIAL_DETAIL;
+    model.zoom = INITIAL_ZOOM;
+    model.x = 0;
+    model.y = 0;
+    model.jx = point.x;
+    model.jy = point.y;
+    model.palette = nil;
+    return model;
+}
+
+- (Model *)withRandom {
+    Model *model = [self copy];
+    if (arc4random_uniform(2)) {
+        CGPoint point = [Fractal randomMandelbrot];
+        model.mode = MANDELBROT;
+        model.x = point.x;
+        model.y = point.y;
+    }
+    else {
+        CGRect rect = [Fractal randomJulia];
+        model.mode = JULIA;
+        model.x = rect.origin.x;
+        model.y = rect.origin.y;
+        model.jx = rect.size.width;
+        model.jy = rect.size.height;
+    }
+    model.max = RANDOM_DETAIL;
+    model.zoom = pow(2, 12 + arc4random_uniform(10));
+    model.palette = nil;
+    return model;
+}
+
 - (Model *)withCenter:(CGPoint)point {
     Model *model = [self copy];
     model.x = point.x;
@@ -177,7 +226,7 @@
     return model;
 }
 
-- (Model *)withJulia:(CGPoint)point {
+- (Model *)withJuliaSeed:(CGPoint)point {
     Model *model = [self copy];
     model.jx = point.x;
     model.jy = point.y;
