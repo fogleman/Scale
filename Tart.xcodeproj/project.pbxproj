@@ -28,10 +28,8 @@
 		69F64D9A16DAEA76003D6DDB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 69F64D9816DAEA76003D6DDB /* Credits.rtf */; };
 		69F64D9D16DAEA76003D6DDB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F64D9C16DAEA76003D6DDB /* AppDelegate.m */; };
 		69F64DA016DAEA76003D6DDB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69F64D9E16DAEA76003D6DDB /* MainMenu.xib */; };
-		69F64DA716DAEAA1003D6DDB /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F64DA616DAEAA1003D6DDB /* OpenCL.framework */; };
 		69F64DAA16DAEB4B003D6DDB /* View.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F64DA916DAEB4B003D6DDB /* View.m */; };
 		69F64DAD16DAED23003D6DDB /* Fractal.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F64DAC16DAED23003D6DDB /* Fractal.m */; };
-		69F64DAF16DAED4B003D6DDB /* Fractal.cl in Sources */ = {isa = PBXBuildFile; fileRef = 69F64DAE16DAED4B003D6DDB /* Fractal.cl */; };
 		69F64DB216DAF3A4003D6DDB /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F64DB116DAF3A4003D6DDB /* Common.m */; };
 		69F64DB516DB0D4B003D6DDB /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F64DB416DB0D4B003D6DDB /* Model.m */; };
 /* End PBXBuildFile section */
@@ -69,12 +67,10 @@
 		69F64D9B16DAEA76003D6DDB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		69F64D9C16DAEA76003D6DDB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		69F64D9F16DAEA76003D6DDB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		69F64DA616DAEAA1003D6DDB /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
 		69F64DA816DAEB4B003D6DDB /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
 		69F64DA916DAEB4B003D6DDB /* View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = View.m; sourceTree = "<group>"; };
 		69F64DAB16DAED23003D6DDB /* Fractal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fractal.h; sourceTree = "<group>"; };
 		69F64DAC16DAED23003D6DDB /* Fractal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fractal.m; sourceTree = "<group>"; };
-		69F64DAE16DAED4B003D6DDB /* Fractal.cl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.opencl; path = Fractal.cl; sourceTree = "<group>"; };
 		69F64DB016DAF3A4003D6DDB /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		69F64DB116DAF3A4003D6DDB /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		69F64DB316DB0D4B003D6DDB /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -86,7 +82,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69F64DA716DAEAA1003D6DDB /* OpenCL.framework in Frameworks */,
 				69F64D8A16DAEA76003D6DDB /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				69F64D8916DAEA76003D6DDB /* Cocoa.framework */,
-				69F64DA616DAEAA1003D6DDB /* OpenCL.framework */,
 				69F64D8B16DAEA76003D6DDB /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -159,7 +153,6 @@
 				69A50F8916DC35A500BF8A25 /* Cache.m */,
 				69F64DB016DAF3A4003D6DDB /* Common.h */,
 				69F64DB116DAF3A4003D6DDB /* Common.m */,
-				69F64DAE16DAED4B003D6DDB /* Fractal.cl */,
 				69F64DAB16DAED23003D6DDB /* Fractal.h */,
 				69F64DAC16DAED23003D6DDB /* Fractal.m */,
 				69314D6D16DD937000371379 /* GradientPanel.h */,
@@ -269,7 +262,6 @@
 				69F64D9D16DAEA76003D6DDB /* AppDelegate.m in Sources */,
 				69F64DAA16DAEB4B003D6DDB /* View.m in Sources */,
 				69F64DAD16DAED23003D6DDB /* Fractal.m in Sources */,
-				69F64DAF16DAED4B003D6DDB /* Fractal.cl in Sources */,
 				69F64DB216DAF3A4003D6DDB /* Common.m in Sources */,
 				69F64DB516DB0D4B003D6DDB /* Model.m in Sources */,
 				69A50F8A16DC35A500BF8A25 /* Cache.m in Sources */,

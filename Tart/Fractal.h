@@ -16,8 +16,6 @@
 
 + (NSData *)computeTileDataWithMode:(int)mode max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(double)jx jy:(double)jy ref:(NSData *)ref;
 
-+ (NSData *)clComputeTileDataWithMode:(int)mode max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(float)jx jy:(float)jy;
-
 + (NSImage *)computeTileImageWithData:(NSData *)data palette:(NSData *)palette;
 
 + (CGPoint)randomMandelbrot;

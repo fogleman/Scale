@@ -8,8 +8,6 @@
 
 #import "Fractal.h"
 #import "Common.h"
-#import "OpenCL/OpenCL.h"
-#import "Fractal.cl.h"
 
 volatile static BOOL cancelFlag = NO;
 
@@ -123,34 +121,6 @@ BOOL julia(int max, int width, int height, double wx, double wy, double ww, doub
         result = mandelbrot(max, tile_size, tile_size, wx, wy, ww, ww, data, ref.bytes);
     }
     return result ? [NSData dataWithBytesNoCopy:data length:length] : nil;
-}
-
-+ (NSData *)clComputeTileDataWithMode:(int)mode max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(float)jx jy:(float)jy {
-    int tile_size = TILE_SIZE * aa;
-    int size = tile_size * tile_size;
-    int length = sizeof(cl_ushort) * size;
-    float ww = (float)TILE_SIZE / zoom;
-    float wx = i * ww;
-    float wy = j * ww;
-    void *data = malloc(length);
-    void *cl_data = gcl_malloc(length, NULL, CL_MEM_WRITE_ONLY);
-    dispatch_queue_t queue = gcl_create_dispatch_queue(CL_DEVICE_TYPE_GPU, NULL);
-    if (!queue) {
-        queue = gcl_create_dispatch_queue(CL_DEVICE_TYPE_CPU, NULL);
-    }
-    dispatch_sync(queue, ^{
-        cl_ndrange range = {1, {0, 0, 0}, {size, 0, 0}, {0, 0, 0}};
-        if (mode == JULIA) {
-            julia_kernel(&range, max, tile_size, tile_size, wx, wy, ww, ww, jx, jy, cl_data);
-        }
-        else {
-            mandelbrot_kernel(&range, max, tile_size, tile_size, wx, wy, ww, ww, cl_data);
-        }
-        gcl_memcpy(data, cl_data, length);
-    });
-    dispatch_release(queue);
-    gcl_free(cl_data);
-    return [NSData dataWithBytesNoCopy:data length:length];
 }
 
 + (NSImage *)computeTileImageWithData:(NSData *)data palette:(NSData *)palette {
