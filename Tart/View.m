@@ -37,8 +37,6 @@
 - (void)updateLabels {
     self.inspectorPanel.centerX.doubleValue = self.model.x;
     self.inspectorPanel.centerY.doubleValue = self.model.y;
-    self.inspectorPanel.zoom.doubleValue = log(self.model.zoom) / log(2);
-    self.inspectorPanel.detail.doubleValue = log(self.model.max) / log(2);
     if (self.model.mode == JULIA) {
         self.inspectorPanel.juliaX.doubleValue = self.model.jx;
         self.inspectorPanel.juliaY.doubleValue = self.model.jy;
@@ -215,8 +213,6 @@
 - (void)onInspector {
     self.model = [self.model withCenter:CGPointMake(self.inspectorPanel.centerX.doubleValue, self.inspectorPanel.centerY.doubleValue)];
     self.model = [self.model withJuliaSeed:CGPointMake(self.inspectorPanel.juliaX.doubleValue, self.inspectorPanel.juliaY.doubleValue)];
-    self.model = [self.model withZoom:pow(2, self.inspectorPanel.zoom.intValue)];
-    self.model = [self.model withMax:pow(2, self.inspectorPanel.detail.doubleValue)];
     [self setNeedsDisplay:YES];
 }
 

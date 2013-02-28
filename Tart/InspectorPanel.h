@@ -17,7 +17,5 @@
 @property (assign) IBOutlet NSTextField *centerY;
 @property (assign) IBOutlet NSTextField *juliaX;
 @property (assign) IBOutlet NSTextField *juliaY;
-@property (assign) IBOutlet NSSlider *zoom;
-@property (assign) IBOutlet NSSlider *detail;
 
 @end
