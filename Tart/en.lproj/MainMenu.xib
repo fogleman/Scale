@@ -1806,7 +1806,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="573675118">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">138412032</int>
-								<string key="NSContents">Note: Antialiasing may significantly slow rendering time.</string>
+								<string key="NSContents">Note: Antialiasing may be much slower but will produce nicer results.</string>
 								<object class="NSFont" key="NSSupport" id="26">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">11</double>
@@ -2290,9 +2290,9 @@
 							<string key="NSKeyEquivalent"/>
 							<int key="NSPeriodicDelay">400</int>
 							<int key="NSPeriodicInterval">75</int>
-							<object class="NSMenuItem" key="NSMenuItem" id="301624685">
+							<object class="NSMenuItem" key="NSMenuItem" id="258427316">
 								<reference key="NSMenu" ref="140268990"/>
-								<string key="NSTitle">2x</string>
+								<string key="NSTitle">Off</string>
 								<string key="NSKeyEquiv"/>
 								<int key="NSKeyEquivModMask">1048576</int>
 								<int key="NSMnemonicLoc">2147483647</int>
@@ -2300,26 +2300,26 @@
 								<reference key="NSOnImage" ref="35465992"/>
 								<reference key="NSMixedImage" ref="502551668"/>
 								<string key="NSAction">_popUpItemAction:</string>
-								<int key="NSTag">2</int>
+								<int key="NSTag">1</int>
 								<reference key="NSTarget" ref="969346286"/>
 							</object>
 							<bool key="NSMenuItemRespectAlignment">YES</bool>
 							<object class="NSMenu" key="NSMenu" id="140268990">
 								<string key="NSTitle">OtherViews</string>
 								<array class="NSMutableArray" key="NSMenuItems">
-									<object class="NSMenuItem" id="258427316">
+									<reference ref="258427316"/>
+									<object class="NSMenuItem" id="301624685">
 										<reference key="NSMenu" ref="140268990"/>
-										<string key="NSTitle">Off</string>
+										<string key="NSTitle">2x</string>
 										<string key="NSKeyEquiv"/>
 										<int key="NSKeyEquivModMask">1048576</int>
 										<int key="NSMnemonicLoc">2147483647</int>
 										<reference key="NSOnImage" ref="35465992"/>
 										<reference key="NSMixedImage" ref="502551668"/>
 										<string key="NSAction">_popUpItemAction:</string>
-										<int key="NSTag">1</int>
+										<int key="NSTag">2</int>
 										<reference key="NSTarget" ref="969346286"/>
 									</object>
-									<reference ref="301624685"/>
 									<object class="NSMenuItem" id="568906614">
 										<reference key="NSMenu" ref="140268990"/>
 										<string key="NSTitle">3x</string>
@@ -2347,7 +2347,6 @@
 								</array>
 								<reference key="NSMenuFont" ref="139135412"/>
 							</object>
-							<int key="NSSelectedIndex">1</int>
 							<int key="NSPreferredEdge">1</int>
 							<bool key="NSUsesItemFromMenu">YES</bool>
 							<bool key="NSAltersState">YES</bool>
