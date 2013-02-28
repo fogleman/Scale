@@ -175,6 +175,7 @@
         }
     }
     [cache removeObjectsForKeys:keys];
+    [self.seen minusSet:[NSSet setWithArray:keys]];
 }
 
 - (void)purgeCaches {
