@@ -35,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		691EACE016DEFB72009F0A30 /* Tart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tart.entitlements; sourceTree = "<group>"; };
 		69314D6D16DD937000371379 /* GradientPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPanel.h; sourceTree = "<group>"; };
 		69314D6E16DD937000371379 /* GradientPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPanel.m; sourceTree = "<group>"; };
 		69314D6F16DD937000371379 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
@@ -179,6 +180,7 @@
 				69F64D9516DAEA76003D6DDB /* main.m */,
 				69F64D9116DAEA76003D6DDB /* Tart-Info.plist */,
 				69F64D9716DAEA76003D6DDB /* Tart-Prefix.pch */,
+				691EACE016DEFB72009F0A30 /* Tart.entitlements */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -363,6 +365,8 @@
 		69F64DA416DAEA76003D6DDB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Tart/Tart.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tart/Tart-Prefix.pch";
@@ -375,6 +379,8 @@
 		69F64DA516DAEA76003D6DDB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Tart/Tart.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
