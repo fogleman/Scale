@@ -20,7 +20,7 @@
 		69314D8816DDA59400371379 /* random.png in Resources */ = {isa = PBXBuildFile; fileRef = 69314D7E16DDA59400371379 /* random.png */; };
 		69314D8916DDA59400371379 /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = 69314D7F16DDA59400371379 /* remove.png */; };
 		69314D8A16DDA59400371379 /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = 69314D8016DDA59400371379 /* save.png */; };
-		69314D8C16DDA59D00371379 /* Tart.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 69314D8B16DDA59D00371379 /* Tart.iconset */; };
+		69314D8C16DDA59D00371379 /* Scale.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 69314D8B16DDA59D00371379 /* Scale.iconset */; };
 		69A50F8A16DC35A500BF8A25 /* Cache.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A50F8916DC35A500BF8A25 /* Cache.m */; };
 		69F64D8A16DAEA76003D6DDB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F64D8916DAEA76003D6DDB /* Cocoa.framework */; };
 		69F64D9416DAEA76003D6DDB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 69F64D9216DAEA76003D6DDB /* InfoPlist.strings */; };
@@ -35,7 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		691EACE016DEFB72009F0A30 /* Tart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tart.entitlements; sourceTree = "<group>"; };
+		691EACE016DEFB72009F0A30 /* Scale.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Scale.entitlements; sourceTree = "<group>"; };
 		69314D6D16DD937000371379 /* GradientPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPanel.h; sourceTree = "<group>"; };
 		69314D6E16DD937000371379 /* GradientPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPanel.m; sourceTree = "<group>"; };
 		69314D6F16DD937000371379 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
@@ -52,18 +52,18 @@
 		69314D7E16DDA59400371379 /* random.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = random.png; sourceTree = "<group>"; };
 		69314D7F16DDA59400371379 /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove.png; sourceTree = "<group>"; };
 		69314D8016DDA59400371379 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
-		69314D8B16DDA59D00371379 /* Tart.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = Tart.iconset; sourceTree = "<group>"; };
+		69314D8B16DDA59D00371379 /* Scale.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = Scale.iconset; sourceTree = "<group>"; };
 		69A50F8816DC35A500BF8A25 /* Cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cache.h; sourceTree = "<group>"; };
 		69A50F8916DC35A500BF8A25 /* Cache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cache.m; sourceTree = "<group>"; };
-		69F64D8616DAEA76003D6DDB /* Tart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		69F64D8616DAEA76003D6DDB /* Scale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69F64D8916DAEA76003D6DDB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		69F64D8C16DAEA76003D6DDB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		69F64D8D16DAEA76003D6DDB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		69F64D8E16DAEA76003D6DDB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		69F64D9116DAEA76003D6DDB /* Tart-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tart-Info.plist"; sourceTree = "<group>"; };
+		69F64D9116DAEA76003D6DDB /* Scale-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Scale-Info.plist"; sourceTree = "<group>"; };
 		69F64D9316DAEA76003D6DDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		69F64D9516DAEA76003D6DDB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		69F64D9716DAEA76003D6DDB /* Tart-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tart-Prefix.pch"; sourceTree = "<group>"; };
+		69F64D9716DAEA76003D6DDB /* Scale-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Scale-Prefix.pch"; sourceTree = "<group>"; };
 		69F64D9916DAEA76003D6DDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		69F64D9B16DAEA76003D6DDB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		69F64D9C16DAEA76003D6DDB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -110,8 +110,8 @@
 		69F64D7D16DAEA76003D6DDB = {
 			isa = PBXGroup;
 			children = (
-				69314D8B16DDA59D00371379 /* Tart.iconset */,
-				69F64D8F16DAEA76003D6DDB /* Tart */,
+				69314D8B16DDA59D00371379 /* Scale.iconset */,
+				69F64D8F16DAEA76003D6DDB /* Scale */,
 				69314D7616DDA59400371379 /* Resources */,
 				69F64D8816DAEA76003D6DDB /* Frameworks */,
 				69F64D8716DAEA76003D6DDB /* Products */,
@@ -121,7 +121,7 @@
 		69F64D8716DAEA76003D6DDB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				69F64D8616DAEA76003D6DDB /* Tart.app */,
+				69F64D8616DAEA76003D6DDB /* Scale.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,7 +145,7 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		69F64D8F16DAEA76003D6DDB /* Tart */ = {
+		69F64D8F16DAEA76003D6DDB /* Scale */ = {
 			isa = PBXGroup;
 			children = (
 				69F64D9B16DAEA76003D6DDB /* AppDelegate.h */,
@@ -169,7 +169,7 @@
 				69F64DA816DAEB4B003D6DDB /* View.h */,
 				69F64DA916DAEB4B003D6DDB /* View.m */,
 			);
-			path = Tart;
+			path = Scale;
 			sourceTree = "<group>";
 		};
 		69F64D9016DAEA76003D6DDB /* Supporting Files */ = {
@@ -178,9 +178,9 @@
 				69F64D9816DAEA76003D6DDB /* Credits.rtf */,
 				69F64D9216DAEA76003D6DDB /* InfoPlist.strings */,
 				69F64D9516DAEA76003D6DDB /* main.m */,
-				69F64D9116DAEA76003D6DDB /* Tart-Info.plist */,
-				69F64D9716DAEA76003D6DDB /* Tart-Prefix.pch */,
-				691EACE016DEFB72009F0A30 /* Tart.entitlements */,
+				69F64D9116DAEA76003D6DDB /* Scale-Info.plist */,
+				69F64D9716DAEA76003D6DDB /* Scale-Prefix.pch */,
+				691EACE016DEFB72009F0A30 /* Scale.entitlements */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -188,9 +188,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		69F64D8516DAEA76003D6DDB /* Tart */ = {
+		69F64D8516DAEA76003D6DDB /* Scale */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 69F64DA316DAEA76003D6DDB /* Build configuration list for PBXNativeTarget "Tart" */;
+			buildConfigurationList = 69F64DA316DAEA76003D6DDB /* Build configuration list for PBXNativeTarget "Scale" */;
 			buildPhases = (
 				69F64D8216DAEA76003D6DDB /* Sources */,
 				69F64D8316DAEA76003D6DDB /* Frameworks */,
@@ -200,9 +200,9 @@
 			);
 			dependencies = (
 			);
-			name = Tart;
-			productName = Tart;
-			productReference = 69F64D8616DAEA76003D6DDB /* Tart.app */;
+			name = Scale;
+			productName = Scale;
+			productReference = 69F64D8616DAEA76003D6DDB /* Scale.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -214,7 +214,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Michael Fogleman";
 			};
-			buildConfigurationList = 69F64D8116DAEA76003D6DDB /* Build configuration list for PBXProject "Tart" */;
+			buildConfigurationList = 69F64D8116DAEA76003D6DDB /* Build configuration list for PBXProject "Scale" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -226,7 +226,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				69F64D8516DAEA76003D6DDB /* Tart */,
+				69F64D8516DAEA76003D6DDB /* Scale */,
 			);
 		};
 /* End PBXProject section */
@@ -249,7 +249,7 @@
 				69314D8816DDA59400371379 /* random.png in Resources */,
 				69314D8916DDA59400371379 /* remove.png in Resources */,
 				69314D8A16DDA59400371379 /* save.png in Resources */,
-				69314D8C16DDA59D00371379 /* Tart.iconset in Resources */,
+				69314D8C16DDA59D00371379 /* Scale.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,12 +365,12 @@
 		69F64DA416DAEA76003D6DDB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Tart/Tart.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Scale/Scale.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tart/Tart-Prefix.pch";
-				INFOPLIST_FILE = "Tart/Tart-Info.plist";
+				GCC_PREFIX_HEADER = "Scale/Scale-Prefix.pch";
+				INFOPLIST_FILE = "Scale/Scale-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -379,14 +379,14 @@
 		69F64DA516DAEA76003D6DDB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Tart/Tart.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Scale/Scale.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tart/Tart-Prefix.pch";
+				GCC_PREFIX_HEADER = "Scale/Scale-Prefix.pch";
 				GCC_UNROLL_LOOPS = YES;
-				INFOPLIST_FILE = "Tart/Tart-Info.plist";
+				INFOPLIST_FILE = "Scale/Scale-Info.plist";
 				LLVM_LTO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -396,7 +396,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		69F64D8116DAEA76003D6DDB /* Build configuration list for PBXProject "Tart" */ = {
+		69F64D8116DAEA76003D6DDB /* Build configuration list for PBXProject "Scale" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				69F64DA116DAEA76003D6DDB /* Debug */,
@@ -405,7 +405,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		69F64DA316DAEA76003D6DDB /* Build configuration list for PBXNativeTarget "Tart" */ = {
+		69F64DA316DAEA76003D6DDB /* Build configuration list for PBXNativeTarget "Scale" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				69F64DA416DAEA76003D6DDB /* Debug */,

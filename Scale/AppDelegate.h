@@ -1,6 +1,6 @@
 //
-//  main.m
-//  Tart
+//  AppDelegate.h
+//  Scale
 //
 //  Created by Michael Fogleman on 2/24/13.
 //  Copyright (c) 2013 Michael Fogleman. All rights reserved.
@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-int main(int argc, char *argv[]) {
-    return NSApplicationMain(argc, (const char **)argv);
-}
+@interface AppDelegate : NSObject <NSApplicationDelegate>
+
+@property (assign) IBOutlet NSWindow *window;
+
+@end

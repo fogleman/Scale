@@ -1,6 +1,6 @@
 //
 //  Cache.m
-//  Tart
+//  Scale
 //
 //  Created by Michael Fogleman on 2/25/13.
 //  Copyright (c) 2013 Michael Fogleman. All rights reserved.
@@ -26,7 +26,7 @@
         self.maxCache = [NSMutableDictionary dictionary];
         self.imageCache = [NSMutableDictionary dictionary];
         dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            self.queue = dispatch_queue_create("com.michaelfogleman.Tart.Cache", DISPATCH_QUEUE_CONCURRENT);
+            self.queue = dispatch_queue_create("com.michaelfogleman.Scale.Cache", DISPATCH_QUEUE_CONCURRENT);
         });
     }
     return self;

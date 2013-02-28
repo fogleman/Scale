@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'Tart' target in the 'Tart' project
-//
-
-#ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
-#endif
