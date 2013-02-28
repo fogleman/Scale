@@ -11,9 +11,9 @@
 #import "OpenCL/OpenCL.h"
 #import "Fractal.cl.h"
 
-static BOOL cancel = NO;
+volatile static BOOL cancelFlag = NO;
 
-void mandelbrot(int max, int width, int height, double wx, double wy, double ww, double wh, unsigned short *data, const unsigned short *ref) {
+BOOL mandelbrot(int max, int width, int height, double wx, double wy, double ww, double wh, unsigned short *data, const unsigned short *ref) {
     int index = 0;
     double dx = ww / width;
     double dy = wh / height;
@@ -35,8 +35,8 @@ void mandelbrot(int max, int width, int height, double wx, double wy, double ww,
                     iteration++;
                 }
                 data[index] = iteration == max ? 0 : iteration;
-                if (cancel) {
-                    return;
+                if (cancelFlag) {
+                    return NO;
                 }
             }
             index++;
@@ -44,9 +44,10 @@ void mandelbrot(int max, int width, int height, double wx, double wy, double ww,
         }
         y0 -= dy;
     }
+    return YES;
 }
 
-void julia(int max, int width, int height, double wx, double wy, double ww, double wh, double jx, double jy, unsigned short *data, const unsigned short *ref) {
+BOOL julia(int max, int width, int height, double wx, double wy, double ww, double wh, double jx, double jy, unsigned short *data, const unsigned short *ref) {
     int index = 0;
     double dx = ww / width;
     double dy = wh / height;
@@ -68,8 +69,8 @@ void julia(int max, int width, int height, double wx, double wy, double ww, doub
                     iteration++;
                 }
                 data[index] = iteration == max ? 0 : iteration;
-                if (cancel) {
-                    return;
+                if (cancelFlag) {
+                    return NO;
                 }
             }
             index++;
@@ -77,6 +78,7 @@ void julia(int max, int width, int height, double wx, double wy, double ww, doub
         }
         y0 -= dy;
     }
+    return YES;
 }
 
 @implementation Fractal
@@ -113,13 +115,14 @@ void julia(int max, int width, int height, double wx, double wy, double ww, doub
     double wx = i * ww;
     double wy = j * ww;
     unsigned short *data = malloc(length);
+    BOOL result;
     if (mode == JULIA) {
-        julia(max, tile_size, tile_size, wx, wy, ww, ww, jx, jy, data, ref.bytes);
+        result = julia(max, tile_size, tile_size, wx, wy, ww, ww, jx, jy, data, ref.bytes);
     }
     else {
-        mandelbrot(max, tile_size, tile_size, wx, wy, ww, ww, data, ref.bytes);
+        result = mandelbrot(max, tile_size, tile_size, wx, wy, ww, ww, data, ref.bytes);
     }
-    return [NSData dataWithBytesNoCopy:data length:length];
+    return result ? [NSData dataWithBytesNoCopy:data length:length] : nil;
 }
 
 + (NSData *)clComputeTileDataWithMode:(int)mode max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(float)jx jy:(float)jy {

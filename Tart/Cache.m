@@ -25,7 +25,7 @@
         self.dataCache = [NSMutableDictionary dictionary];
         self.maxCache = [NSMutableDictionary dictionary];
         self.imageCache = [NSMutableDictionary dictionary];
-        self.queue = dispatch_queue_create('com.michaelfogleman.Tart.Cache', DISPATCH_QUEUE_CONCURRENT);
+        self.queue = dispatch_queue_create("com.michaelfogleman.Tart.Cache", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
 }
@@ -123,7 +123,7 @@
     long zoom = UNPACK(key, 2);
     Model *model = self.model;
     NSData *cachedData = [self.dataCache objectForKey:key];
-    int cachedMax = LOOKUP(self.maxCache, key);
+    int cachedMax = (int)LOOKUP(self.maxCache, key);
     if (cachedData && cachedMax >= model.max) {
         NSImage *image = [Fractal computeTileImageWithData:cachedData palette:model.palette];
         [self.imageCache setObject:image forKey:key];
@@ -138,6 +138,13 @@
             return;
         }
         NSData *data = [Fractal computeTileDataWithMode:model.mode max:model.max zoom:zoom i:i j:j aa:model.aa jx:model.jx jy:model.jy ref:cachedData];
+        if (!data) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.seen removeObject:key];
+                [self.view setNeedsDisplay:YES];
+            });
+            return;
+        }
         NSImage *image = [Fractal computeTileImageWithData:data palette:model.palette];
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([model dataCompatible:self.model]) {
