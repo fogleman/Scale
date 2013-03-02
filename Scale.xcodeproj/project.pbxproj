@@ -21,6 +21,8 @@
 		69314D8916DDA59400371379 /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = 69314D7F16DDA59400371379 /* remove.png */; };
 		69314D8A16DDA59400371379 /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = 69314D8016DDA59400371379 /* save.png */; };
 		69314D8C16DDA59D00371379 /* Scale.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 69314D8B16DDA59D00371379 /* Scale.iconset */; };
+		697221B416E187EC00F0C2BB /* StaticView.m in Sources */ = {isa = PBXBuildFile; fileRef = 697221B316E187EC00F0C2BB /* StaticView.m */; };
+		697221B716E18DFB00F0C2BB /* JuliaPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 697221B616E18DFB00F0C2BB /* JuliaPanel.m */; };
 		69A50F8A16DC35A500BF8A25 /* Cache.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A50F8916DC35A500BF8A25 /* Cache.m */; };
 		69F64D8A16DAEA76003D6DDB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F64D8916DAEA76003D6DDB /* Cocoa.framework */; };
 		69F64D9416DAEA76003D6DDB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 69F64D9216DAEA76003D6DDB /* InfoPlist.strings */; };
@@ -53,6 +55,10 @@
 		69314D7F16DDA59400371379 /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove.png; sourceTree = "<group>"; };
 		69314D8016DDA59400371379 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
 		69314D8B16DDA59D00371379 /* Scale.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = Scale.iconset; sourceTree = "<group>"; };
+		697221B216E187EC00F0C2BB /* StaticView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticView.h; sourceTree = "<group>"; };
+		697221B316E187EC00F0C2BB /* StaticView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticView.m; sourceTree = "<group>"; };
+		697221B516E18DFB00F0C2BB /* JuliaPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JuliaPanel.h; sourceTree = "<group>"; };
+		697221B616E18DFB00F0C2BB /* JuliaPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JuliaPanel.m; sourceTree = "<group>"; };
 		69A50F8816DC35A500BF8A25 /* Cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cache.h; sourceTree = "<group>"; };
 		69A50F8916DC35A500BF8A25 /* Cache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cache.m; sourceTree = "<group>"; };
 		69F64D8616DAEA76003D6DDB /* Scale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scale.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,9 +168,13 @@
 				69314D7016DD937000371379 /* GradientView.m */,
 				69314D7116DD937000371379 /* InspectorPanel.h */,
 				69314D7216DD937000371379 /* InspectorPanel.m */,
+				697221B516E18DFB00F0C2BB /* JuliaPanel.h */,
+				697221B616E18DFB00F0C2BB /* JuliaPanel.m */,
 				69F64D9E16DAEA76003D6DDB /* MainMenu.xib */,
 				69F64DB316DB0D4B003D6DDB /* Model.h */,
 				69F64DB416DB0D4B003D6DDB /* Model.m */,
+				697221B216E187EC00F0C2BB /* StaticView.h */,
+				697221B316E187EC00F0C2BB /* StaticView.m */,
 				69F64D9016DAEA76003D6DDB /* Supporting Files */,
 				69F64DA816DAEB4B003D6DDB /* View.h */,
 				69F64DA916DAEB4B003D6DDB /* View.m */,
@@ -270,6 +280,8 @@
 				69314D7316DD937000371379 /* GradientPanel.m in Sources */,
 				69314D7416DD937000371379 /* GradientView.m in Sources */,
 				69314D7516DD937000371379 /* InspectorPanel.m in Sources */,
+				697221B416E187EC00F0C2BB /* StaticView.m in Sources */,
+				697221B716E18DFB00F0C2BB /* JuliaPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

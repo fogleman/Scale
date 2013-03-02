@@ -195,6 +195,15 @@
     }
 }
 
+- (IBAction)onJuliaSetPicker:(id)sender {
+    if (!self.juliaPanel.isVisible) {
+        [self.juliaPanel makeKeyAndOrderFront:nil];
+    }
+    else {
+        [self.juliaPanel orderOut:nil];
+    }
+}
+
 - (void)onGradient:(NSGradient *)gradient {
     self.model = [self.model withGradient:gradient];
     [self setNeedsDisplay:YES];
@@ -213,6 +222,11 @@
 - (void)onInspector {
     self.model = [self.model withCenter:CGPointMake(self.inspectorPanel.centerX.doubleValue, self.inspectorPanel.centerY.doubleValue)];
     self.model = [self.model withJuliaSeed:CGPointMake(self.inspectorPanel.juliaX.doubleValue, self.inspectorPanel.juliaY.doubleValue)];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)onJuliaSeed:(CGPoint)seed {
+    self.model = [[self.model withJulia] withJuliaSeed:seed];
     [self setNeedsDisplay:YES];
 }
 

@@ -22,4 +22,8 @@
 
 + (CGRect)randomJulia;
 
++ (NSData *)computeDataWithMode:(int)mode max:(int)max zoom:(long)zoom x:(double)x y:(double)y width:(int)width height:(int)height aa:(int)aa jx:(double)jx jy:(double)jy ref:(NSData *)ref;
+
++ (NSImage *)computeImageWithData:(NSData *)data palette:(NSData *)palette width:(int)width height:(int)height aa:(int)aa;
+
 @end

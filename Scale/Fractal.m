@@ -229,4 +229,54 @@ BOOL julia(int max, int width, int height, double wx, double wy, double ww, doub
     return CGRectMake(x, y, jx, jy);
 }
 
++ (NSData *)computeDataWithMode:(int)mode max:(int)max zoom:(long)zoom x:(double)x y:(double)y width:(int)width height:(int)height aa:(int)aa jx:(double)jx jy:(double)jy ref:(NSData *)ref {
+    int aa_width = width * aa;
+    int aa_height = height * aa;
+    int size = aa_width * aa_height;
+    int length = sizeof(unsigned short) * size;
+    double ww = (double)width / zoom;
+    double wh = (double)height / zoom;
+    double wx = x - ww / 2;
+    double wy = y - wh / 2;
+    unsigned short *data = malloc(length);
+    BOOL result;
+    if (mode == JULIA) {
+        result = julia(max, aa_width, aa_height, wx, wy, ww, wh, jx, jy, data, ref.bytes);
+    }
+    else {
+        result = mandelbrot(max, aa_width, aa_height, wx, wy, ww, wh, data, ref.bytes);
+    }
+    return result ? [NSData dataWithBytesNoCopy:data length:length] : nil;
+}
+
++ (NSImage *)computeImageWithData:(NSData *)data palette:(NSData *)palette width:(int)width height:(int)height aa:(int)aa {
+    int aa_width = width * aa;
+    int aa_height = height * aa;
+    const unsigned short *values = (const unsigned short *)data.bytes;
+    const unsigned int *colors = (const unsigned int *)palette.bytes;
+    int count = (int)data.length / sizeof(unsigned short);
+    int hi = (int)palette.length / sizeof(unsigned int) - 1;
+    unsigned int *pixels = malloc(sizeof(unsigned int) * count);
+    for (int i = 0; i < count; i++) {
+        int index = values[i];
+        index = index ? index : hi;
+        index = index <= hi ? index : hi;
+        pixels[i] = colors[index];
+    }
+    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:aa_width pixelsHigh:aa_height bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bitmapFormat:NSAlphaNonpremultipliedBitmapFormat bytesPerRow:aa_width * 4 bitsPerPixel:32];
+    memcpy(bitmap.bitmapData, pixels, aa_width * aa_height * 4);
+    free(pixels);
+    NSImage *image = [[NSImage alloc] init];
+    [image addRepresentation:bitmap];
+    if (aa == 1) {
+        return image;
+    }
+    NSDictionary *hints = [NSDictionary dictionaryWithObject:@(NSImageInterpolationHigh) forKey:NSImageHintInterpolation];
+    NSImage *tile = [[NSImage alloc] initWithSize:CGSizeMake(width, height)];
+    [tile lockFocus];
+    [image drawInRect:NSMakeRect(0, 0, width, height) fromRect:NSZeroRect operation:NSCompositeCopy fraction:1 respectFlipped:NO hints:hints];
+    [tile unlockFocus];
+    return tile;
+}
+
 @end

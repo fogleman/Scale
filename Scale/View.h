@@ -10,6 +10,7 @@
 #import "Cache.h"
 #import "GradientPanel.h"
 #import "InspectorPanel.h"
+#import "JuliaPanel.h"
 #import "Model.h"
 
 @interface View : NSView
@@ -22,6 +23,7 @@
 
 @property (assign) IBOutlet GradientPanel *gradientPanel;
 @property (assign) IBOutlet InspectorPanel *inspectorPanel;
+@property (assign) IBOutlet JuliaPanel *juliaPanel;
 @property (assign) IBOutlet NSView *saveAccessoryView;
 @property (assign) IBOutlet NSTextField *saveWidth;
 @property (assign) IBOutlet NSTextField *saveHeight;
@@ -33,5 +35,6 @@
 - (void)onGamma:(double)gamma;
 - (void)onAntialiasing:(int)aa;
 - (void)onInspector;
+- (void)onJuliaSeed:(CGPoint)seed;
 
 @end
