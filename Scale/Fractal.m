@@ -186,7 +186,7 @@ BOOL julia(int power, int max, int width, int height, double wx, double wy, doub
         int index;
         while (1) {
             index = arc4random_uniform(count);
-            if (data[index] >= threshold && data[index] < hi) {
+            if (data[index] >= threshold) {
                 break;
             }
         }
@@ -226,7 +226,7 @@ BOOL julia(int power, int max, int width, int height, double wx, double wy, doub
         int index;
         while (1) {
             index = arc4random_uniform(count);
-            if (data[index] >= threshold && data[index] < hi) {
+            if (data[index] >= threshold) {
                 break;
             }
         }
