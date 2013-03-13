@@ -30,6 +30,9 @@
 #define RANDOM_STEPS 4
 #define RANDOM_DETAIL 256
 
+#define MIN_POWER 2
+#define MAX_POWER 10
+
 @interface Common : NSObject
 
 + (void)shuffleArray:(NSMutableArray *)array;

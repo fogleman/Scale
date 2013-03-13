@@ -11,6 +11,7 @@
 @interface Model : NSObject <NSCopying>
 
 @property (assign, readonly, nonatomic) int mode;
+@property (assign, readonly, nonatomic) int power;
 @property (assign, readonly, nonatomic) int max;
 @property (assign, readonly, nonatomic) long zoom;
 @property (assign, readonly, nonatomic) double x;
@@ -24,7 +25,7 @@
 
 + (Model *)mandelbrot;
 + (Model *)julia;
-+ (Model *)random;
+//+ (Model *)random;
 
 - (BOOL)dataCompatible:(Model *)model;
 - (BOOL)imageCompatible:(Model *)model;
@@ -41,6 +42,7 @@
 - (Model *)withRandom;
 - (Model *)withCenter:(CGPoint)point;
 - (Model *)withJuliaSeed:(CGPoint)point;
+- (Model *)withPower:(int)power;
 - (Model *)withMax:(int)max;
 - (Model *)withZoom:(long)zoom;
 - (Model *)withGradient:(NSGradient *)gradient;
@@ -48,6 +50,8 @@
 - (Model *)withAntialiasing:(int)aa;
 - (Model *)moreDetail;
 - (Model *)lessDetail;
+- (Model *)morePower;
+- (Model *)lessPower;
 - (Model *)resetZoom;
 - (Model *)zoomIn;
 - (Model *)zoomInAtPoint:(CGPoint)point size:(CGSize)size;

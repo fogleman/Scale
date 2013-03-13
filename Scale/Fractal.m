@@ -11,8 +11,9 @@
 
 volatile static BOOL cancelFlag = NO;
 
-BOOL mandelbrot(int max, int width, int height, double wx, double wy, double ww, double wh, unsigned short *data, const unsigned short *ref) {
+BOOL mandelbrot(int power, int max, int width, int height, double wx, double wy, double ww, double wh, unsigned short *data, const unsigned short *ref) {
     int index = 0;
+    int p = power - 1;
     double dx = ww / width;
     double dy = wh / height;
     double y0 = wy + wh;
@@ -27,9 +28,15 @@ BOOL mandelbrot(int max, int width, int height, double wx, double wy, double ww,
                 double y = 0;
                 int iteration = 0;
                 while (x * x + y * y < 4 && iteration < max) {
-                    double temp = x * x - y * y + x0;
-                    y = 2 * x * y + y0;
-                    x = temp;
+                    double a = x;
+                    double b = y;
+                    for (int i = 0; i < p; i++) {
+                        double temp = a * x - b * y;
+                        y = b * x + a * y;
+                        x = temp;
+                    }
+                    x += x0;
+                    y += y0;
                     iteration++;
                 }
                 data[index] = iteration == max ? 0 : iteration;
@@ -45,8 +52,9 @@ BOOL mandelbrot(int max, int width, int height, double wx, double wy, double ww,
     return YES;
 }
 
-BOOL julia(int max, int width, int height, double wx, double wy, double ww, double wh, double jx, double jy, unsigned short *data, const unsigned short *ref) {
+BOOL julia(int power, int max, int width, int height, double wx, double wy, double ww, double wh, double jx, double jy, unsigned short *data, const unsigned short *ref) {
     int index = 0;
+    int p = power - 1;
     double dx = ww / width;
     double dy = wh / height;
     double y0 = wy + wh;
@@ -61,9 +69,15 @@ BOOL julia(int max, int width, int height, double wx, double wy, double ww, doub
                 double y = y0;
                 int iteration = 1;
                 while (x * x + y * y < 4 && iteration < max) {
-                    double temp = x * x - y * y + jx;
-                    y = 2 * x * y + jy;
-                    x = temp;
+                    double a = x;
+                    double b = y;
+                    for (int i = 0; i < p; i++) {
+                        double temp = a * x - b * y;
+                        y = b * x + a * y;
+                        x = temp;
+                    }
+                    x += jx;
+                    y += jy;
                     iteration++;
                 }
                 data[index] = iteration == max ? 0 : iteration;
@@ -105,7 +119,7 @@ BOOL julia(int max, int width, int height, double wx, double wy, double ww, doub
     return [NSData dataWithBytesNoCopy:palette length:length];
 }
 
-+ (NSData *)computeTileDataWithMode:(int)mode max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(double)jx jy:(double)jy ref:(NSData *)ref {
++ (NSData *)computeTileDataWithMode:(int)mode power:(int)power max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(double)jx jy:(double)jy ref:(NSData *)ref {
     int tile_size = TILE_SIZE * aa;
     int size = tile_size * tile_size;
     int length = sizeof(unsigned short) * size;
@@ -115,10 +129,10 @@ BOOL julia(int max, int width, int height, double wx, double wy, double ww, doub
     unsigned short *data = malloc(length);
     BOOL result;
     if (mode == JULIA) {
-        result = julia(max, tile_size, tile_size, wx, wy, ww, ww, jx, jy, data, ref.bytes);
+        result = julia(power, max, tile_size, tile_size, wx, wy, ww, ww, jx, jy, data, ref.bytes);
     }
     else {
-        result = mandelbrot(max, tile_size, tile_size, wx, wy, ww, ww, data, ref.bytes);
+        result = mandelbrot(power, max, tile_size, tile_size, wx, wy, ww, ww, data, ref.bytes);
     }
     return result ? [NSData dataWithBytesNoCopy:data length:length] : nil;
 }
@@ -152,7 +166,7 @@ BOOL julia(int max, int width, int height, double wx, double wy, double ww, doub
     return tile;
 }
 
-+ (CGPoint)randomMandelbrot {
++ (CGPoint)randomMandelbrotWithPower:(int)power {
     int size = TILE_SIZE;
     int count = size * size;
     double wx = -2;
@@ -163,7 +177,7 @@ BOOL julia(int max, int width, int height, double wx, double wy, double ww, doub
     double y = 0;
     unsigned short *data = malloc(sizeof(unsigned short) * count);
     for (int n = 0; n < RANDOM_STEPS; n++) {
-        mandelbrot(RANDOM_DETAIL, size, size, wx, wy, ww, wh, data, NULL);
+        mandelbrot(power, RANDOM_DETAIL, size, size, wx, wy, ww, wh, data, NULL);
         int hi = 0;
         for (int i = 0; i < count; i++) {
             hi = MAX(hi, data[i]);
@@ -189,8 +203,8 @@ BOOL julia(int max, int width, int height, double wx, double wy, double ww, doub
     return CGPointMake(x, y);
 }
 
-+ (CGRect)randomJulia {
-    CGPoint point = [Fractal randomMandelbrot];
++ (CGRect)randomJuliaWithPower:(int)power {
+    CGPoint point = [Fractal randomMandelbrotWithPower:power];
     int size = TILE_SIZE;
     int count = size * size;
     double wx = -2;
@@ -203,7 +217,7 @@ BOOL julia(int max, int width, int height, double wx, double wy, double ww, doub
     double y = 0;
     unsigned short *data = malloc(sizeof(unsigned short) * count);
     for (int n = 0; n < RANDOM_STEPS; n++) {
-        julia(RANDOM_DETAIL, size, size, wx, wy, ww, wh, jx, jy, data, NULL);
+        julia(power, RANDOM_DETAIL, size, size, wx, wy, ww, wh, jx, jy, data, NULL);
         int hi = 0;
         for (int i = 0; i < count; i++) {
             hi = MAX(hi, data[i]);
@@ -229,7 +243,7 @@ BOOL julia(int max, int width, int height, double wx, double wy, double ww, doub
     return CGRectMake(x, y, jx, jy);
 }
 
-+ (NSData *)computeDataWithMode:(int)mode max:(int)max zoom:(long)zoom x:(double)x y:(double)y width:(int)width height:(int)height aa:(int)aa jx:(double)jx jy:(double)jy ref:(NSData *)ref {
++ (NSData *)computeDataWithMode:(int)mode power:(int)power max:(int)max zoom:(long)zoom x:(double)x y:(double)y width:(int)width height:(int)height aa:(int)aa jx:(double)jx jy:(double)jy ref:(NSData *)ref {
     int aa_width = width * aa;
     int aa_height = height * aa;
     int size = aa_width * aa_height;
@@ -241,10 +255,10 @@ BOOL julia(int max, int width, int height, double wx, double wy, double ww, doub
     unsigned short *data = malloc(length);
     BOOL result;
     if (mode == JULIA) {
-        result = julia(max, aa_width, aa_height, wx, wy, ww, wh, jx, jy, data, ref.bytes);
+        result = julia(power, max, aa_width, aa_height, wx, wy, ww, wh, jx, jy, data, ref.bytes);
     }
     else {
-        result = mandelbrot(max, aa_width, aa_height, wx, wy, ww, wh, data, ref.bytes);
+        result = mandelbrot(power, max, aa_width, aa_height, wx, wy, ww, wh, data, ref.bytes);
     }
     return result ? [NSData dataWithBytesNoCopy:data length:length] : nil;
 }

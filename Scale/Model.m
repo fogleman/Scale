@@ -17,6 +17,7 @@
 + (Model *)mandelbrot {
     Model *model = [[Model alloc] init];
     model.mode = MANDELBROT;
+    model.power = 2;
     model.max = INITIAL_DETAIL;
     model.zoom = INITIAL_ZOOM;
     model.x = -0.5;
@@ -32,6 +33,7 @@
 + (Model *)julia {
     Model *model = [[Model alloc] init];
     model.mode = JULIA;
+    model.power = 2;
     model.max = INITIAL_DETAIL;
     model.zoom = INITIAL_ZOOM;
     model.x = 0;
@@ -46,14 +48,15 @@
 
 + (Model *)random {
     Model *model = [[Model alloc] init];
+    model.power = 2;
     if (arc4random_uniform(2)) {
-        CGPoint point = [Fractal randomMandelbrot];
+        CGPoint point = [Fractal randomMandelbrotWithPower:model.power];
         model.mode = MANDELBROT;
         model.x = point.x;
         model.y = point.y;
     }
     else {
-        CGRect rect = [Fractal randomJulia];
+        CGRect rect = [Fractal randomJuliaWithPower:model.power];
         model.mode = JULIA;
         model.x = rect.origin.x;
         model.y = rect.origin.y;
@@ -79,6 +82,7 @@
     Model *model = [[[self class] alloc] init];
     if (model) {
         model.mode = self.mode;
+        model.power = self.power;
         model.max = self.max;
         model.zoom = self.zoom;
         model.x = self.x;
@@ -95,6 +99,9 @@
 
 - (BOOL)dataCompatible:(Model *)model {
     if (self.mode != model.mode) {
+        return NO;
+    }
+    if (self.power != model.power) {
         return NO;
     }
     if (self.aa != model.aa) {
@@ -184,7 +191,7 @@
 }
 
 - (Model *)withJulia {
-    CGPoint point = [Fractal randomMandelbrot];
+    CGPoint point = [Fractal randomMandelbrotWithPower:self.power];
     Model *model = [self copy];
     model.mode = JULIA;
     model.max = INITIAL_DETAIL;
@@ -200,13 +207,13 @@
 - (Model *)withRandom {
     Model *model = [self copy];
     if (arc4random_uniform(2)) {
-        CGPoint point = [Fractal randomMandelbrot];
+        CGPoint point = [Fractal randomMandelbrotWithPower:self.power];
         model.mode = MANDELBROT;
         model.x = point.x;
         model.y = point.y;
     }
     else {
-        CGRect rect = [Fractal randomJulia];
+        CGRect rect = [Fractal randomJuliaWithPower:self.power];
         model.mode = JULIA;
         model.x = rect.origin.x;
         model.y = rect.origin.y;
@@ -230,6 +237,12 @@
     Model *model = [self copy];
     model.jx = point.x;
     model.jy = point.y;
+    return model;
+}
+
+- (Model *)withPower:(int)power {
+    Model *model = [self copy];
+    model.power = power;
     return model;
 }
 
@@ -277,6 +290,18 @@
     Model *model = [self copy];
     model.max = MAX(self.max / 2, MIN_DETAIL);
     model.palette = nil;
+    return model;
+}
+
+- (Model *)morePower {
+    Model *model = [self copy];
+    model.power = MIN(self.power + 1, MAX_POWER);
+    return model;
+}
+
+- (Model *)lessPower {
+    Model *model = [self copy];
+    model.power = MAX(self.power - 1, MIN_POWER);
     return model;
 }
 
@@ -357,6 +382,10 @@
 
 - (void)setMode:(int)mode {
     _mode = mode;
+}
+
+- (void)setPower:(int)power {
+    _power = power;
 }
 
 - (void)setMax:(int)max {

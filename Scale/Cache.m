@@ -139,7 +139,7 @@
             });
             return;
         }
-        NSData *data = [Fractal computeTileDataWithMode:model.mode max:model.max zoom:zoom i:i j:j aa:model.aa jx:model.jx jy:model.jy ref:cachedData];
+        NSData *data = [Fractal computeTileDataWithMode:model.mode power:model.power max:model.max zoom:zoom i:i j:j aa:model.aa jx:model.jx jy:model.jy ref:cachedData];
         if (!data) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.seen removeObject:key];

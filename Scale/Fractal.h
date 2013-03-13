@@ -14,15 +14,15 @@
 
 + (NSData *)computePaletteWithGradient:(NSGradient *)gradient size:(int)size gamma:(double)gamma;
 
-+ (NSData *)computeTileDataWithMode:(int)mode max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(double)jx jy:(double)jy ref:(NSData *)ref;
++ (NSData *)computeTileDataWithMode:(int)mode power:(int)power max:(int)max zoom:(long)zoom i:(long)i j:(long)j aa:(int)aa jx:(double)jx jy:(double)jy ref:(NSData *)ref;
 
 + (NSImage *)computeTileImageWithData:(NSData *)data palette:(NSData *)palette;
 
-+ (CGPoint)randomMandelbrot;
++ (CGPoint)randomMandelbrotWithPower:(int)power;
 
-+ (CGRect)randomJulia;
++ (CGRect)randomJuliaWithPower:(int)power;
 
-+ (NSData *)computeDataWithMode:(int)mode max:(int)max zoom:(long)zoom x:(double)x y:(double)y width:(int)width height:(int)height aa:(int)aa jx:(double)jx jy:(double)jy ref:(NSData *)ref;
++ (NSData *)computeDataWithMode:(int)mode power:(int)power max:(int)max zoom:(long)zoom x:(double)x y:(double)y width:(int)width height:(int)height aa:(int)aa jx:(double)jx jy:(double)jy ref:(NSData *)ref;
 
 + (NSImage *)computeImageWithData:(NSData *)data palette:(NSData *)palette width:(int)width height:(int)height aa:(int)aa;
 

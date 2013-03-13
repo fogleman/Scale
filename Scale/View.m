@@ -177,6 +177,16 @@
     [self setNeedsDisplay:YES];
 }
 
+- (IBAction)onIncreaseExponent:(id)sender {
+    self.model = [self.model morePower];
+    [self setNeedsDisplay:YES];
+}
+
+- (IBAction)onDecreaseExponent:(id)sender {
+    self.model = [self.model lessPower];
+    [self setNeedsDisplay:YES];
+}
+
 - (IBAction)onColors:(id)sender {
     if (!self.gradientPanel.isVisible) {
         [self.gradientPanel makeKeyAndOrderFront:nil];
@@ -254,7 +264,7 @@
                     if (self.cancelSave) {
                         return;
                     }
-                    NSData *data = [Fractal computeTileDataWithMode:model.mode max:model.max zoom:model.zoom i:i j:j aa:model.aa jx:model.jx jy:model.jy ref:nil];
+                    NSData *data = [Fractal computeTileDataWithMode:model.mode power:model.power max:model.max zoom:model.zoom i:i j:j aa:model.aa jx:model.jx jy:model.jy ref:nil];
                     NSImage *tile = [Fractal computeTileImageWithData:data palette:model.palette];
                     NSArray *key = [NSArray arrayWithObjects:@(i), @(j), nil];
                     @synchronized(tiles) {

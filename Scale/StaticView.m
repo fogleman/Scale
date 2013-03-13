@@ -41,7 +41,7 @@
 - (void)drawRect:(NSRect)dirtyRect {
     Model *model = self.model;
     CGSize size = self.bounds.size;
-    NSData *data = [Fractal computeDataWithMode:model.mode max:model.max zoom:model.zoom x:model.x y:model.y width:size.width height:size.height aa:model.aa jx:model.jx jy:model.jy ref:nil];
+    NSData *data = [Fractal computeDataWithMode:model.mode power:model.power max:model.max zoom:model.zoom x:model.x y:model.y width:size.width height:size.height aa:model.aa jx:model.jx jy:model.jy ref:nil];
     NSImage *image = [Fractal computeImageWithData:data palette:model.palette width:size.width height:size.height aa:model.aa];
     [image drawInRect:self.bounds fromRect:NSZeroRect operation:NSCompositeCopy fraction:1 respectFlipped:YES hints:nil];
 }
