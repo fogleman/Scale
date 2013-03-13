@@ -179,11 +179,13 @@
 
 - (IBAction)onIncreaseExponent:(id)sender {
     self.model = [self.model morePower];
+    self.juliaPanel.view.model = [self.juliaPanel.view.model withPower:self.model.power];
     [self setNeedsDisplay:YES];
 }
 
 - (IBAction)onDecreaseExponent:(id)sender {
     self.model = [self.model lessPower];
+    self.juliaPanel.view.model = [self.juliaPanel.view.model withPower:self.model.power];
     [self setNeedsDisplay:YES];
 }
 

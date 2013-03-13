@@ -25,7 +25,6 @@
 
 + (Model *)mandelbrot;
 + (Model *)julia;
-//+ (Model *)random;
 
 - (BOOL)dataCompatible:(Model *)model;
 - (BOOL)imageCompatible:(Model *)model;

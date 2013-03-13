@@ -23,7 +23,7 @@
     CGSize size = self.view.bounds.size;
     float jx = (point.x / size.width) * 3 - 1.5;
     float jy = (point.y / size.height) * 3 - 1.5;
-    [self.fractalView onJuliaSeed:CGPointMake(jx, jy)];
+    [self.fractalView onJuliaSeed:CGPointMake(jx, -jy)];
 }
 
 - (void)mouseMoved:(NSEvent *)event {
@@ -31,7 +31,7 @@
     CGSize size = self.view.bounds.size;
     float jx = (point.x / size.width) * 3 - 1.5;
     float jy = (point.y / size.height) * 3 - 1.5;
-    self.view.model = [self.view.model withJuliaSeed:CGPointMake(jx, jy)];
+    self.view.model = [self.view.model withJuliaSeed:CGPointMake(jx, -jy)];
 }
 
 @end
