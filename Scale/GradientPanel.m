@@ -214,7 +214,7 @@
     [self.gradients addObject:gradient];
     
     name = @"Preset 16";
-    colors = [NSArray arrayWithObjects:[Common color:0xC74223], [Common color:0x5E7D4D], [Common color:0xE0D1A3], [Common color:0x7D603E], [Common color:0x232621], nil];
+    colors = [NSArray arrayWithObjects:[Common color:0xBAC45E], [Common color:0xADA344], [Common color:0x734A22], [Common color:0x4C2D22], [Common color:0x261B1D], nil];
     gradient = [[NSGradient alloc] initWithColors:colors];
     [self.names addObject:name];
     [self.gradients addObject:gradient];
