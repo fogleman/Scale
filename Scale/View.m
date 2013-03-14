@@ -35,6 +35,16 @@
 }
 
 - (void)updateLabels {
+    [self.inspectorPanel.mode selectSegmentWithTag:self.model.mode];
+    self.inspectorPanel.zoomTextField.intValue = log(self.model.zoom) / log(2);
+    self.inspectorPanel.detailTextField.intValue = log(self.model.max) / log(2);
+    self.inspectorPanel.exponentTextField.intValue = self.model.power;
+    self.inspectorPanel.zoomSlider.intValue = self.inspectorPanel.zoomTextField.intValue;
+    self.inspectorPanel.detailSlider.intValue = self.inspectorPanel.detailTextField.intValue;
+    self.inspectorPanel.exponentSlider.intValue = self.inspectorPanel.exponentTextField.intValue;
+    self.inspectorPanel.zoomStepper.intValue = self.inspectorPanel.zoomTextField.intValue;
+    self.inspectorPanel.detailStepper.intValue = self.inspectorPanel.detailTextField.intValue;
+    self.inspectorPanel.exponentStepper.intValue = self.inspectorPanel.exponentTextField.intValue;
     self.inspectorPanel.centerX.doubleValue = self.model.x;
     self.inspectorPanel.centerY.doubleValue = self.model.y;
     if (self.model.mode == JULIA) {
@@ -234,6 +244,18 @@
 - (void)onInspector {
     self.model = [self.model withCenter:CGPointMake(self.inspectorPanel.centerX.doubleValue, self.inspectorPanel.centerY.doubleValue)];
     self.model = [self.model withJuliaSeed:CGPointMake(self.inspectorPanel.juliaX.doubleValue, self.inspectorPanel.juliaY.doubleValue)];
+    self.model = [self.model withZoom:pow(2, self.inspectorPanel.zoomTextField.intValue)];
+    self.model = [self.model withMax:pow(2, self.inspectorPanel.detailTextField.intValue)];
+    self.model = [self.model withPower:self.inspectorPanel.exponentTextField.intValue];
+    NSInteger mode = self.inspectorPanel.mode.selectedSegment + 1;
+    if (mode != self.model.mode) {
+        if (mode == MANDELBROT) {
+            self.model = [self.model withMandelbrot];
+        }
+        else {
+            self.model = [self.model withJulia];
+        }
+    }
     [self setNeedsDisplay:YES];
 }
 

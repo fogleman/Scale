@@ -15,4 +15,19 @@
     [self.fractalView onInspector];
 }
 
+- (IBAction)onZoom:(id)sender {
+    self.zoomTextField.intValue = [sender intValue];
+    [self.fractalView onInspector];
+}
+
+- (IBAction)onDetail:(id)sender {
+    self.detailTextField.intValue = [sender intValue];
+    [self.fractalView onInspector];
+}
+
+- (IBAction)onExponent:(id)sender {
+    self.exponentTextField.intValue = [sender intValue];
+    [self.fractalView onInspector];
+}
+
 @end
