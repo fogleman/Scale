@@ -207,6 +207,18 @@
     [self.names addObject:name];
     [self.gradients addObject:gradient];
     
+    name = @"Preset 15";
+    colors = [NSArray arrayWithObjects:[Common color:0xFF7F66], [Common color:0xFFF6E5], [Common color:0x7ECEFD], [Common color:0x2185C5], [Common color:0x3E454C], nil];
+    gradient = [[NSGradient alloc] initWithColors:colors];
+    [self.names addObject:name];
+    [self.gradients addObject:gradient];
+    
+    name = @"Preset 16";
+    colors = [NSArray arrayWithObjects:[Common color:0xC74223], [Common color:0x5E7D4D], [Common color:0xE0D1A3], [Common color:0x7D603E], [Common color:0x232621], nil];
+    gradient = [[NSGradient alloc] initWithColors:colors];
+    [self.names addObject:name];
+    [self.gradients addObject:gradient];
+    
     for (NSString *name in self.names) {
         [self.presetsButton addItemWithTitle:name];
     }
