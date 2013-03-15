@@ -11,6 +11,9 @@
 //
 // TODO
 // - progress indicator?
+// - color schemes
+// - documentation
+// - better screenshots / annotated
 //
 
 #import <Cocoa/Cocoa.h>
