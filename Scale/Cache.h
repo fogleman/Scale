@@ -19,6 +19,7 @@
 @property (retain) NSMutableDictionary *dataCache;
 @property (retain) NSMutableDictionary *maxCache;
 @property (retain) NSMutableDictionary *imageCache;
+@property (assign) int pending;
 @property (assign) CGSize size;
 @property (assign) CGPoint a;
 @property (assign) CGPoint b;

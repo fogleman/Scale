@@ -25,6 +25,7 @@
         self.dataCache = [NSMutableDictionary dictionary];
         self.maxCache = [NSMutableDictionary dictionary];
         self.imageCache = [NSMutableDictionary dictionary];
+        self.pending = 0;
         dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             self.queue = dispatch_queue_create("com.michaelfogleman.Scale.Cache", DISPATCH_QUEUE_CONCURRENT);
         });
@@ -131,11 +132,13 @@
         [self.imageCache setObject:image forKey:key];
         return;
     }
+    self.pending++;
     dispatch_async(self.queue, ^{
         if ([self isKeyStale:key]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.seen removeObject:key];
                 [self.view setNeedsDisplay:YES];
+                self.pending--;
             });
             return;
         }
@@ -144,6 +147,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.seen removeObject:key];
                 [self.view setNeedsDisplay:YES];
+                self.pending--;
             });
             return;
         }
@@ -163,6 +167,7 @@
                 [self.seen removeObject:key];
             }
             [self.view setNeedsDisplay:YES];
+            self.pending--;
         });
     });
 }
