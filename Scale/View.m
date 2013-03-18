@@ -247,6 +247,7 @@
     self.model = [self.model withZoom:pow(2, self.inspectorPanel.zoomTextField.intValue)];
     self.model = [self.model withMax:pow(2, self.inspectorPanel.detailTextField.intValue)];
     self.model = [self.model withPower:self.inspectorPanel.exponentTextField.intValue];
+    self.juliaPanel.view.model = [self.juliaPanel.view.model withPower:self.model.power];
     NSInteger mode = self.inspectorPanel.mode.selectedSegment + 1;
     if (mode != self.model.mode) {
         if (mode == MANDELBROT) {
