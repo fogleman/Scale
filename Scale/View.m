@@ -276,6 +276,7 @@
 
 - (void)onLibraryModel:(Model *)model {
     self.model = model;
+    [self.gradientPanel setGradient:self.model.gradient];
     [self setNeedsDisplay:YES];
 }
 

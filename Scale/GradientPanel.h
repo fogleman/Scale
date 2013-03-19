@@ -22,4 +22,6 @@
 @property (retain) NSMutableArray *names;
 @property (retain) NSMutableArray *gradients;
 
+- (void)setGradient:(NSGradient *)gradient;
+
 @end
