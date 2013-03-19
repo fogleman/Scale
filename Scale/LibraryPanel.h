@@ -8,10 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class View;
+
 @interface LibraryPanel : NSPanel
 
-@property (assign) IBOutlet NSArrayController *arrayController;
+@property (assign) IBOutlet View *fractalView;
+@property (assign) IBOutlet NSCollectionView *collectionView;
 @property (retain) NSMutableArray *items;
-@property (retain) NSIndexSet *selectedItems;
 
 @end

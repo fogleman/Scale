@@ -53,6 +53,38 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)coder {
+    self = [super init];
+    if (self) {
+        self.mode = [coder decodeIntForKey:@"mode"];
+        self.power = [coder decodeIntForKey:@"power"];
+        self.max = [coder decodeIntForKey:@"max"];
+        self.zoom = [coder decodeIntegerForKey:@"zoom"];
+        self.x = [coder decodeDoubleForKey:@"x"];
+        self.y = [coder decodeDoubleForKey:@"y"];
+        self.aa = [coder decodeIntForKey:@"aa"];
+        self.jx = [coder decodeDoubleForKey:@"jx"];
+        self.jy = [coder decodeDoubleForKey:@"jy"];
+        self.gamma = [coder decodeDoubleForKey:@"gamma"];
+        self.gradient = [coder decodeObjectForKey:@"gradient"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeInt:self.mode forKey:@"mode"];
+    [coder encodeInt:self.power forKey:@"power"];
+    [coder encodeInt:self.max forKey:@"max"];
+    [coder encodeInteger:self.zoom forKey:@"zoom"];
+    [coder encodeDouble:self.x forKey:@"x"];
+    [coder encodeDouble:self.y forKey:@"y"];
+    [coder encodeInt:self.aa forKey:@"aa"];
+    [coder encodeDouble:self.jx forKey:@"jx"];
+    [coder encodeDouble:self.jy forKey:@"jy"];
+    [coder encodeDouble:self.gamma forKey:@"gamma"];
+    [coder encodeObject:self.gradient forKey:@"gradient"];
+}
+
 - (Model *)copyWithZone:(NSZone *)zone {
     Model *model = [[[self class] alloc] init];
     if (model) {

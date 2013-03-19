@@ -8,31 +8,34 @@
 
 #import "LibraryPanel.h"
 #import "LibraryItem.h"
+#import "Model.h"
+#import "View.h"
 
 @implementation LibraryPanel
 
-@synthesize selectedItems = _selectedItems;
-
-- (id)init {
-    self = [super init];
-    if (self) {
-        self.items = [NSMutableArray array];
-    }
-    return self;
-}
-
 - (void)awakeFromNib {
-    for (int i = 0; i < 10; i++) {
-        [self.arrayController addObject:[LibraryItem itemWithImage:[NSImage imageNamed:@"mandelbrot.png"]]];
+    self.items = [NSMutableArray array];
+    NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[NSColor blackColor] endingColor:[NSColor whiteColor]];
+    for (int i = 0; i < 32; i++) {
+        Model *model = [[[Model mandelbrot] withJulia] withGradient:gradient];
+        [self.items addObject:[LibraryItem itemWithModel:model]];
+    }
+    [self.collectionView setContent:[NSArray arrayWithArray:self.items]];
+    [self.collectionView addObserver:self forKeyPath:@"selectionIndexes" options:NSKeyValueObservingOptionNew context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSIndexSet *selectedItems = [change objectForKey:NSKeyValueChangeNewKey];
+    if (selectedItems.count == 1) {
+        LibraryItem *item = [self.items objectAtIndex:selectedItems.firstIndex];
+        [self.fractalView onLibraryModel:item.model];
     }
 }
 
-- (NSIndexSet *)selectedItems {
-    return _selectedItems;
+- (IBAction)onSave:(id)sender {
 }
 
-- (void)setSelectedItems:(NSIndexSet *)selectedItems {
-    _selectedItems = selectedItems;
+- (IBAction)onRemove:(id)sender {
 }
 
 @end

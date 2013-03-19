@@ -226,6 +226,15 @@
     }
 }
 
+- (IBAction)onLibrary:(id)sender {
+    if (!self.libraryPanel.isVisible) {
+        [self.libraryPanel makeKeyAndOrderFront:nil];
+    }
+    else {
+        [self.libraryPanel orderOut:nil];
+    }
+}
+
 - (void)onGradient:(NSGradient *)gradient {
     self.model = [self.model withGradient:gradient];
     [self setNeedsDisplay:YES];
@@ -262,6 +271,11 @@
 
 - (void)onJuliaSeed:(CGPoint)seed {
     self.model = [[self.model withJulia] withJuliaSeed:seed];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)onLibraryModel:(Model *)model {
+    self.model = model;
     [self setNeedsDisplay:YES];
 }
 

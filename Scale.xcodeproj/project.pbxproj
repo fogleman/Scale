@@ -25,6 +25,7 @@
 		696E6A8316F6A84D00D6B42D /* LibraryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 696E6A8216F6A84D00D6B42D /* LibraryItem.m */; };
 		697221B416E187EC00F0C2BB /* StaticView.m in Sources */ = {isa = PBXBuildFile; fileRef = 697221B316E187EC00F0C2BB /* StaticView.m */; };
 		697221B716E18DFB00F0C2BB /* JuliaPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 697221B616E18DFB00F0C2BB /* JuliaPanel.m */; };
+		6978384B16F7EC39003E20F7 /* library.png in Resources */ = {isa = PBXBuildFile; fileRef = 6978384A16F7EC39003E20F7 /* library.png */; };
 		69A50F8A16DC35A500BF8A25 /* Cache.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A50F8916DC35A500BF8A25 /* Cache.m */; };
 		69E3E70816F166A700C51655 /* picker.png in Resources */ = {isa = PBXBuildFile; fileRef = 69E3E70716F166A700C51655 /* picker.png */; };
 		69F64D8A16DAEA76003D6DDB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F64D8916DAEA76003D6DDB /* Cocoa.framework */; };
@@ -66,6 +67,7 @@
 		697221B316E187EC00F0C2BB /* StaticView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticView.m; sourceTree = "<group>"; };
 		697221B516E18DFB00F0C2BB /* JuliaPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JuliaPanel.h; sourceTree = "<group>"; };
 		697221B616E18DFB00F0C2BB /* JuliaPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JuliaPanel.m; sourceTree = "<group>"; };
+		6978384A16F7EC39003E20F7 /* library.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = library.png; sourceTree = "<group>"; };
 		69A50F8816DC35A500BF8A25 /* Cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cache.h; sourceTree = "<group>"; };
 		69A50F8916DC35A500BF8A25 /* Cache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cache.m; sourceTree = "<group>"; };
 		69E3E70716F166A700C51655 /* picker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picker.png; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				69314D7916DDA59400371379 /* inspector.png */,
 				69314D7A16DDA59400371379 /* julia.png */,
 				69314D7B16DDA59400371379 /* less.png */,
+				6978384A16F7EC39003E20F7 /* library.png */,
 				69314D7C16DDA59400371379 /* mandelbrot.png */,
 				69314D7D16DDA59400371379 /* more.png */,
 				69526B2416F29C7D002B3566 /* out.png */,
@@ -274,6 +277,7 @@
 				69E3E70816F166A700C51655 /* picker.png in Resources */,
 				69526B2516F29C7D002B3566 /* in.png in Resources */,
 				69526B2616F29C7D002B3566 /* out.png in Resources */,
+				6978384B16F7EC39003E20F7 /* library.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

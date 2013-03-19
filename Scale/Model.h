@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Model : NSObject <NSCopying>
+@interface Model : NSObject <NSCopying, NSCoding>
 
 @property (assign, readonly, nonatomic) int mode;
 @property (assign, readonly, nonatomic) int power;
