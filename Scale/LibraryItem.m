@@ -7,19 +7,28 @@
 //
 
 #import "LibraryItem.h"
-#import "Fractal.h"
 
 @implementation LibraryItem
 
-+ (LibraryItem *)itemWithModel:(Model *)model {
++ (LibraryItem *)itemWithModel:(Model *)model image:(NSImage *)image {
     LibraryItem *item = [[LibraryItem alloc] init];
     item.model = model;
-    CGSize size = CGSizeMake(120, 90);
-    model = [model withZoom:model.zoom * size.width / 800.0];
-    NSData *data = [Fractal computeDataWithMode:model.mode power:model.power max:model.max zoom:model.zoom x:model.x y:model.y width:size.width height:size.height aa:model.aa jx:model.jx jy:model.jy ref:nil];
-    NSImage *image = [Fractal computeImageWithData:data palette:model.palette width:size.width height:size.height aa:model.aa];
     item.image = image;
     return item;
+}
+
+- (id)initWithCoder:(NSCoder *)coder {
+    self = [super init];
+    if (self) {
+        self.model = [coder decodeObjectForKey:@"model"];
+        self.image = [coder decodeObjectForKey:@"image"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:self.model forKey:@"model"];
+    [coder encodeObject:self.image forKey:@"image"];
 }
 
 @end

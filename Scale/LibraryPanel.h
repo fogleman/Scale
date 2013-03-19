@@ -14,6 +14,8 @@
 
 @property (assign) IBOutlet View *fractalView;
 @property (assign) IBOutlet NSCollectionView *collectionView;
+@property (assign) IBOutlet NSButton *removeButton;
 @property (retain) NSMutableArray *items;
+@property (retain) NSIndexSet *selectionIndexes;
 
 @end

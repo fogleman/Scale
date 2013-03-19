@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "Model.h"
 
-@interface LibraryItem : NSObject
+@interface LibraryItem : NSObject <NSCoding>
 
 @property (retain) Model *model;
 @property (retain) NSImage *image;
 
-+ (LibraryItem *)itemWithModel:(Model *)model;
++ (LibraryItem *)itemWithModel:(Model *)model image:(NSImage *)image;
 
 @end

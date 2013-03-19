@@ -8,34 +8,79 @@
 
 #import "LibraryPanel.h"
 #import "LibraryItem.h"
+#import "Fractal.h"
 #import "Model.h"
 #import "View.h"
 
 @implementation LibraryPanel
 
 - (void)awakeFromNib {
-    self.items = [NSMutableArray array];
-    NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[NSColor blackColor] endingColor:[NSColor whiteColor]];
-    for (int i = 0; i < 32; i++) {
-        Model *model = [[[Model mandelbrot] withJulia] withGradient:gradient];
-        [self.items addObject:[LibraryItem itemWithModel:model]];
-    }
-    [self.collectionView setContent:[NSArray arrayWithArray:self.items]];
+    self.items = [NSMutableArray arrayWithArray:[self load]];
     [self.collectionView addObserver:self forKeyPath:@"selectionIndexes" options:NSKeyValueObservingOptionNew context:NULL];
+    [self onItemsChanged];
+}
+
+- (NSArray *)load {
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"library"];
+    if (data) {
+        @try {
+            return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        }
+        @catch (NSException *exception) {
+            return [NSArray array];
+        }
+    }
+    else {
+        return [NSArray array];
+    }
+}
+
+- (void)save {
+    NSArray *items = [NSArray arrayWithArray:self.items];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:items];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"library"];
+}
+
+- (void)onItemsChanged {
+    NSArray *items = [NSArray arrayWithArray:self.items];
+    [self.collectionView setContent:items];
+    [self save];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSIndexSet *selectedItems = [change objectForKey:NSKeyValueChangeNewKey];
-    if (selectedItems.count == 1) {
-        LibraryItem *item = [self.items objectAtIndex:selectedItems.firstIndex];
+    self.selectionIndexes = [change objectForKey:NSKeyValueChangeNewKey];
+    [self.removeButton setEnabled:self.selectionIndexes.count];
+    if (self.selectionIndexes.count == 1) {
+        LibraryItem *item = [self.items objectAtIndex:self.selectionIndexes.firstIndex];
         [self.fractalView onLibraryModel:item.model];
     }
 }
 
 - (IBAction)onSave:(id)sender {
+    CGSize size = CGSizeMake(120, 90);
+    Model *model = self.fractalView.model;
+    model = [model withZoom:model.zoom * size.width / 800.0];
+    NSData *data = [Fractal computeDataWithMode:model.mode power:model.power max:model.max zoom:model.zoom x:model.x y:model.y width:size.width height:size.height aa:model.aa jx:model.jx jy:model.jy ref:nil];
+    NSImage *image = [Fractal computeImageWithData:data palette:model.palette width:size.width height:size.height aa:model.aa];
+    [self.items addObject:[LibraryItem itemWithModel:self.fractalView.model image:image]];
+    [self onItemsChanged];
 }
 
 - (IBAction)onRemove:(id)sender {
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"Remove"];
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert setMessageText:@"Remove the selected fractals from the library?"];
+    [alert setInformativeText:@"This action cannot be undone."];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    [alert beginSheetModalForWindow:self modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+}
+
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    if (returnCode == NSAlertFirstButtonReturn) {
+        [self.items removeObjectsAtIndexes:self.selectionIndexes];
+        [self onItemsChanged];
+    }
 }
 
 @end
