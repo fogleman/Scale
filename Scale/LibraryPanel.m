@@ -15,9 +15,29 @@
 @implementation LibraryPanel
 
 - (void)awakeFromNib {
-    self.items = [NSMutableArray arrayWithArray:[self load]];
+    NSArray *items = [self load];
+    if (items.count == 0) {
+        items = [self loadDefaults];
+    }
+    self.items = [NSMutableArray arrayWithArray:items];
     [self.collectionView addObserver:self forKeyPath:@"selectionIndexes" options:NSKeyValueObservingOptionNew context:NULL];
     [self onItemsChanged];
+}
+
+- (NSArray *)loadDefaults {
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"library" withExtension:@"dat"];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    if (data) {
+        @try {
+            return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        }
+        @catch (NSException *exception) {
+            return [NSArray array];
+        }
+    }
+    else {
+        return [NSArray array];
+    }
 }
 
 - (NSArray *)load {
@@ -95,10 +115,7 @@
 
 - (void)restoreAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     if (returnCode == NSAlertFirstButtonReturn) {
-        NSURL *url = [[NSBundle mainBundle] URLForResource:@"library" withExtension:@"dat"];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        NSArray *items = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        self.items = [NSMutableArray arrayWithArray:items];
+        self.items = [NSMutableArray arrayWithArray:[self loadDefaults]];
         [self onItemsChanged];
     }
 }
