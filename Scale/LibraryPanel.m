@@ -73,12 +73,32 @@
     [alert setMessageText:@"Remove the selected fractals from the library?"];
     [alert setInformativeText:@"This action cannot be undone."];
     [alert setAlertStyle:NSWarningAlertStyle];
-    [alert beginSheetModalForWindow:self modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    [alert beginSheetModalForWindow:self modalDelegate:self didEndSelector:@selector(removeAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
 
-- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+- (void)removeAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     if (returnCode == NSAlertFirstButtonReturn) {
         [self.items removeObjectsAtIndexes:self.selectionIndexes];
+        [self onItemsChanged];
+    }
+}
+
+- (IBAction)onRestore:(id)sender {
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"Restore Defaults"];
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert setMessageText:@"Restore the library to its original defaults?"];
+    [alert setInformativeText:@"All user-created fractals will be removed."];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    [alert beginSheetModalForWindow:self modalDelegate:self didEndSelector:@selector(restoreAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+}
+
+- (void)restoreAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    if (returnCode == NSAlertFirstButtonReturn) {
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"library" withExtension:@"dat"];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        NSArray *items = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        self.items = [NSMutableArray arrayWithArray:items];
         [self onItemsChanged];
     }
 }

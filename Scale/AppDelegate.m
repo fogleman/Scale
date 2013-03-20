@@ -19,6 +19,15 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
+    return;
+    NSSavePanel *panel = [NSSavePanel savePanel];
+    panel.allowedFileTypes = [NSArray arrayWithObjects:@"dat", nil];
+    [panel beginSheetModalForWindow:self.window completionHandler:^(NSInteger returnCode) {
+        if (returnCode == NSOKButton) {
+            NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"library"];
+            [data writeToURL:panel.URL atomically:NO];
+        }
+    }];
 }
 
 @end

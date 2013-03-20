@@ -28,6 +28,7 @@
 		6978384B16F7EC39003E20F7 /* library.png in Resources */ = {isa = PBXBuildFile; fileRef = 6978384A16F7EC39003E20F7 /* library.png */; };
 		69A50F8A16DC35A500BF8A25 /* Cache.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A50F8916DC35A500BF8A25 /* Cache.m */; };
 		69E3E70816F166A700C51655 /* picker.png in Resources */ = {isa = PBXBuildFile; fileRef = 69E3E70716F166A700C51655 /* picker.png */; };
+		69E6E3FC16F93B8B00EA8779 /* library.dat in Resources */ = {isa = PBXBuildFile; fileRef = 69E6E3FB16F93B8B00EA8779 /* library.dat */; };
 		69F64D8A16DAEA76003D6DDB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F64D8916DAEA76003D6DDB /* Cocoa.framework */; };
 		69F64D9416DAEA76003D6DDB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 69F64D9216DAEA76003D6DDB /* InfoPlist.strings */; };
 		69F64D9616DAEA76003D6DDB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F64D9516DAEA76003D6DDB /* main.m */; };
@@ -71,6 +72,7 @@
 		69A50F8816DC35A500BF8A25 /* Cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cache.h; sourceTree = "<group>"; };
 		69A50F8916DC35A500BF8A25 /* Cache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cache.m; sourceTree = "<group>"; };
 		69E3E70716F166A700C51655 /* picker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picker.png; sourceTree = "<group>"; };
+		69E6E3FB16F93B8B00EA8779 /* library.dat */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = library.dat; sourceTree = "<group>"; };
 		69F64D8616DAEA76003D6DDB /* Scale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69F64D8916DAEA76003D6DDB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		69F64D8C16DAEA76003D6DDB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -109,6 +111,7 @@
 		69314D7616DDA59400371379 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				69E6E3FB16F93B8B00EA8779 /* library.dat */,
 				69314D7816DDA59400371379 /* colors.png */,
 				69526B2316F29C7D002B3566 /* in.png */,
 				69314D7916DDA59400371379 /* inspector.png */,
@@ -278,6 +281,7 @@
 				69526B2516F29C7D002B3566 /* in.png in Resources */,
 				69526B2616F29C7D002B3566 /* out.png in Resources */,
 				6978384B16F7EC39003E20F7 /* library.png in Resources */,
+				69E6E3FC16F93B8B00EA8779 /* library.dat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
