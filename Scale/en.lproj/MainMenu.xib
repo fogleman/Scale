@@ -1333,7 +1333,7 @@
 			<object class="NSWindowTemplate" id="572274716">
 				<int key="NSWindowStyleMask">23</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{139, 81}, {279, 384}}</string>
+				<string key="NSWindowRect">{{1161, 0}, {279, 384}}</string>
 				<int key="NSWTFlags">-461896704</int>
 				<string key="NSWindowTitle">Colors</string>
 				<string key="NSWindowClass">GradientPanel</string>
@@ -2012,7 +2012,7 @@
 			<object class="NSWindowTemplate" id="912065298">
 				<int key="NSWindowStyleMask">23</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{996, 121}, {279, 384}}</string>
+				<string key="NSWindowRect">{{1161, 494}, {279, 384}}</string>
 				<int key="NSWTFlags">-461896704</int>
 				<string key="NSWindowTitle">Inspector</string>
 				<string key="NSWindowClass">InspectorPanel</string>
@@ -2847,7 +2847,7 @@
 			<object class="NSWindowTemplate" id="1044559097">
 				<int key="NSWindowStyleMask">31</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{673, 222}, {400, 400}}</string>
+				<string key="NSWindowRect">{{0, 0}, {400, 400}}</string>
 				<int key="NSWTFlags">-461896704</int>
 				<string key="NSWindowTitle">Julia Set Picker</string>
 				<string key="NSWindowClass">JuliaPanel</string>
@@ -2881,7 +2881,7 @@
 			<object class="NSWindowTemplate" id="669831900">
 				<int key="NSWindowStyleMask">31</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{139, 81}, {420, 384}}</string>
+				<string key="NSWindowRect">{{0, 494}, {420, 384}}</string>
 				<int key="NSWTFlags">-461896704</int>
 				<string key="NSWindowTitle">Fractal Library</string>
 				<string key="NSWindowClass">LibraryPanel</string>
