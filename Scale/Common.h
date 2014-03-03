@@ -37,5 +37,6 @@
 
 + (void)shuffleArray:(NSMutableArray *)array;
 + (NSColor *)color:(unsigned int)value;
++ (CGFloat)scaleFactor;
 
 @end

@@ -102,10 +102,11 @@ BOOL julia(int power, int max, int width, int height, double wx, double wy, doub
 }
 
 + (NSData *)computePaletteWithGradient:(NSGradient *)gradient size:(int)size gamma:(double)gamma {
-    NSImage *image = [[NSImage alloc] initWithSize:CGSizeMake(size, 1)];
+    int scaledSize = size / (int)[Common scaleFactor];
+    NSImage *image = [[NSImage alloc] initWithSize:CGSizeMake(scaledSize, 1)];
     [image lockFocus];
-    [gradient drawFromPoint:CGPointMake(0, 0) toPoint:CGPointMake(size, 0) options:0];
-    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0, 0, size, 1)];
+    [gradient drawFromPoint:CGPointMake(0, 0) toPoint:CGPointMake(scaledSize, 0) options:0];
+    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0, 0, scaledSize, 1)];
     [image unlockFocus];
     unsigned int *data = (unsigned int *)bitmap.bitmapData;
     int length = sizeof(unsigned int) * size;

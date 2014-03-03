@@ -25,4 +25,15 @@
     return [NSColor colorWithDeviceRed:r green:g blue:b alpha:a];
 }
 
++ (CGFloat)scaleFactor {
+    CGFloat result = 1;
+    if ([[NSScreen mainScreen] respondsToSelector:@selector(backingScaleFactor)]) {
+        for (NSScreen *screen in [NSScreen screens]) {
+            CGFloat scale = [screen backingScaleFactor];
+            result = MAX(result, scale);
+        }
+    }
+    return result;
+}
+
 @end
