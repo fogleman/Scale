@@ -4,7 +4,7 @@ Explore the mathematical beauty of fractals and create stunning
 fractal art with Scale. Scale is fast and a pleasure to use. It
 was designed from the ground up to be intuitive and user-friendly.
 
-![Screenshot](http://www.michaelfogleman.com/static/img/scale.jpg)
+![Screenshot](http://www.michaelfogleman.com/static/img/project/scale/scale.png)
 
 ### Features
 
